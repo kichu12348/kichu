@@ -423,7 +423,7 @@ export default function Home() {
           <h2 className={styles.sectionTitle}>About Me</h2>
           <div className={styles.aboutContent}>
             <p>
-              I'm a passionate full-stack developer currently pursuing Computer
+              I&apos;m a passionate full-stack developer currently pursuing Computer
               Science Engineering at College of Engineering Chengannur. With
               expertise in modern web technologies and a strong foundation in
               systems programming, I build scalable, efficient solutions that
@@ -725,7 +725,7 @@ export default function Home() {
         >
           <h2 className={styles.sectionTitle}>Get In Touch</h2>
           <p className={styles.contactText}>
-            I'm always open to discussing new projects, opportunities, or
+            I&apos;m always open to discussing new projects, opportunities, or
             partnerships. Feel free to reach out through any of the platforms
             below.
           </p>
