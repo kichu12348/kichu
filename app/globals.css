@@ -1,3 +1,14 @@
+:root {
+  --q-primary: 142, 70, 186; /* Softer purple */
+  --q-secondary: 72, 149, 239; /* Muted blue */
+  --q-tertiary: 76, 175, 142; /* Softer teal */
+  --q-dark: 30, 34, 51; /* Deeper dark */
+  --q-light: 248, 250, 252; /* Slightly warmer white */
+  --q-uncertainty: 5px;
+  --q-wave-period: 15s;
+  --q-probability: 0.8;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

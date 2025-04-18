@@ -794,7 +794,7 @@ export default function Home() {
         </p>
         <br/>
         <p className={styles.footerText}>
-          Made with <span role="img" aria-label="love">❤️</span> by Kichu
+          Made with <span role="img" aria-label="love">❤️</span> by Kichu A.K.A Betmen
         </p>
       </footer>
     </main>
