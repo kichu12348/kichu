@@ -765,7 +765,7 @@ export default function Home() {
           <Github 
             className={styles.socialIcon}
             size={24}
-            color={cyberpunkMode ? "#ffffff" : "#000000"}
+            color={activeSection==="education" ? "#ffffff" : "#000000"}
           />
         </a>
         <a
@@ -776,14 +776,14 @@ export default function Home() {
           <Linkedin 
             className={styles.socialIcon}
             size={24}
-            color={cyberpunkMode ? "#ffffff" : "#000000"}
+            color={activeSection==="education" ? "#ffffff" : "#000000"}
           />
         </a>
         <a href="mailto:rmahadevan574@gmail.com">
           <Mail 
             className={styles.socialIcon}
             size={24}
-            color={cyberpunkMode ? "#ffffff" : "#000000"}
+            color={activeSection==="education" ? "#ffffff" : "#000000"}
           />
         </a>
       </div>

@@ -47,8 +47,6 @@ export const metadata = {
 export const viewport={
   themeColor: 'rgb(248, 250, 252)',
   viewport: 'width=device-width, initial-scale=1.0',
-  appleMobileWebAppCapable: 'yes',
-  appleMobileWebAppStatusBarStyle: 'black-translucent'
 }
 
 export default function RootLayout({ children }) {
