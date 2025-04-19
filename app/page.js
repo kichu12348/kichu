@@ -268,10 +268,12 @@ export default function Home() {
         setQuantumState(1);
       } else if (scrollPercentage < 0.8) {
         setQuantumState(2);
+        setCyberpunkMode(false);
         document.head.querySelector('meta[name="theme-color"]').setAttribute('content', 'rgb(248, 250, 252)');
       } else {
         document.head.querySelector('meta[name="theme-color"]').setAttribute('content', 'rgb(18, 24, 38)');
         setQuantumState(3);
+        setCyberpunkMode(true);
       }
     };
 
@@ -765,7 +767,7 @@ export default function Home() {
           <Github 
             className={styles.socialIcon}
             size={24}
-            color={activeSection==="education" ? "#ffffff" : "#000000"}
+            color={ cyberpunkMode ? "#ffffff" : "#000000"}
           />
         </a>
         <a
@@ -776,14 +778,14 @@ export default function Home() {
           <Linkedin 
             className={styles.socialIcon}
             size={24}
-            color={activeSection==="education" ? "#ffffff" : "#000000"}
+            color={ cyberpunkMode ? "#ffffff" : "#000000"}
           />
         </a>
         <a href="mailto:rmahadevan574@gmail.com">
           <Mail 
             className={styles.socialIcon}
             size={24}
-            color={activeSection==="education" ? "#ffffff" : "#000000"}
+            color={ cyberpunkMode ? "#ffffff" : "#000000"}
           />
         </a>
       </div>
