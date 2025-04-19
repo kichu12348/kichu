@@ -2,11 +2,11 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "../page.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Code, LayoutGrid, Cpu, Sparkles } from "lucide-react";
 
 export default function HeroSection() {
-  const [particlePosition, setParticlePosition] = useState({ x: 0, y: 0 });
+  // const [particlePosition, setParticlePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   
@@ -27,18 +27,17 @@ export default function HeroSection() {
     if (h1Element) {
       h1Element.setAttribute('data-text', h1Element.textContent);
     }
+    // const handleMouseMove = (e) => {
+    //   if (heroRef.current) {
+    //     const rect = heroRef.current.getBoundingClientRect();
+    //     const x = ((e.clientX - rect.left) / rect.width);
+    //     const y = ((e.clientY - rect.top) / rect.height);
+    //     setParticlePosition({ x, y });
+    //   }
+    // };
 
-    const handleMouseMove = (e) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width);
-        const y = ((e.clientY - rect.top) / rect.height);
-        setParticlePosition({ x, y });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    // window.addEventListener('mousemove', handleMouseMove);
+    // return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Badge items
@@ -51,25 +50,6 @@ export default function HeroSection() {
 
   return (
     <section ref={heroRef} className={styles.hero}>
-      <div className={styles.particleContainer}>
-        {[...Array(30)].map((_, i) => (
-          <motion.div 
-            key={i}
-            className={styles.particle}
-            animate={{
-              x: `calc(${particlePosition.x * 100}% + ${(i % 3 - 1) * 20}px)`,
-              y: `calc(${particlePosition.y * 100}% + ${(Math.floor(i / 3) % 3 - 1) * 20}px)`,
-              opacity: 0.4 + (i % 3) * 0.2,
-              scale: 0.8 + (i % 5) * 0.1,
-            }}
-            transition={{
-              duration: 0.2 + (i % 5) * 0.1,
-              ease: "easeOut"
-            }}
-          />
-        ))}
-      </div>
-      
       <motion.div
         style={{ opacity: opacityTransform, y: yPosTransform }}
         className={styles.heroContent}
