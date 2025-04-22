@@ -1108,3 +1108,48 @@
     padding: 1.25rem 1rem;
   }
 }
+
+.batmanButton {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  background: rgba(var(--q-dark), 0.07);
+  color: rgba(var(--q-dark), 0.5);
+  border: none;
+  font-family: var(--font-geist-mono);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+  letter-spacing: 0.05em;
+  transition: 
+    background 0.3s cubic-bezier(.4,2,.6,1),
+    color 0.3s cubic-bezier(.4,2,.6,1),
+    box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+  position: relative;
+  outline: none;
+}
+
+.batmanButton:hover,
+.batmanButton:focus {
+  background: rgba(var(--q-dark), 0.13);
+  color: rgba(var(--q-dark), 0.7);
+}
+
+.batmanButtonActive {
+  background: rgba(255, 214, 0, 0.13);
+  box-shadow: 0 0 16px 4px #FFD600, 0 0 32px 8px #FFD60055;
+}
+
+.batmanButtonText {
+  color: rgba(var(--q-dark), 0.5);
+  text-shadow: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.batmanButtonTextActive {
+  color: #FFD600;
+  text-shadow:
+    0 0 8px #FFD600,
+    0 0 16px #FFD60088;
+  transition: color 0.3s, text-shadow 0.3s;
+}
