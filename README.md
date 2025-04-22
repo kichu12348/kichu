@@ -9,8 +9,8 @@ Welcome, traveler, to the source code dimension of my personal portfolio website
 This project is my digital playground, showcasing my skills, projects, and a perhaps unhealthy obsession with cool visual effects. It features:
 
 *   A mind-bending **Neural Network background** powered by React Three Fiber.
-*   A **"Quantum" theme** that shifts colors and styles as you scroll (because why not?).
-*   A **custom "Quantum Cursor"** that jitters with probability (mostly).
+*   A **"Quantum" theme** that shifts colors and styles as you scroll (cuz why not?).
+*   A **custom "Quantum Cursor"** that jitters with probability (kinda maybe).
 *   Smooth scrolling and animations using Framer Motion and GSAP.
 *   Detailed sections for About Me, Skills, Projects, Education, and Contact.
 *   Responsive design that looks decent on most devices (probably).
