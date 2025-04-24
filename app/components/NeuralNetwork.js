@@ -19,7 +19,7 @@ export default function NeuralNetwork({ sectionColors }) {
   }, []);
 
   const points = useMemo(() => {
-    const count = 1000;
+    const count = 50;
     const points = [];
     const radius = 3;
 
