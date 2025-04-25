@@ -21,7 +21,11 @@ const ProjectsSection = forwardRef((_, ref) => {
         {
           url: "https://github.com/kichu12348/vibelink",
           icon: Github,
-          text: "GitHub Repo"
+          text: "GitHub"
+        },{
+          url: "https://vibelink.kichu.space",
+          icon: Globe,
+          text: "Learn More"
         }
       ]
     },
@@ -39,7 +43,12 @@ const ProjectsSection = forwardRef((_, ref) => {
         {
           url: "https://github.com/kichu12348/snapbook",
           icon: Github,
-          text: "GitHub Repo"
+          text: "GitHub"
+        },
+        {
+          url: "https://snapbook.kichu.space",
+          icon: Globe,
+          text: "Learn More"
         }
       ]
     },
@@ -57,7 +66,7 @@ const ProjectsSection = forwardRef((_, ref) => {
         {
           url: "https://github.com/kichu12348/dune_base",
           icon: Github,
-          text: "GitHub Repo"
+          text: "GitHub"
         },
         {
           url: "https://utsav-2k25.vercel.app",
