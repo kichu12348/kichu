@@ -34,19 +34,6 @@ const ProjectsSection = forwardRef((_, ref) => {
                   ))}
                 </ul>
               </div>
-              <div className={styles.projectLinks}>
-                {project.links.map((link, linkIndex) => (
-                  <a
-                    key={linkIndex}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={link.icon === Globe ? styles.demoLink : ""}
-                  >
-                    <link.icon size={18} /> {link.text}
-                  </a>
-                ))}
-              </div>
               {project.collaborators && project.collaborators.length > 0 && (
                 <div className={styles.collaborators}>
                   <h4>
@@ -71,6 +58,19 @@ const ProjectsSection = forwardRef((_, ref) => {
                   ))}
                 </div>
               )}
+              <div className={styles.projectLinks}>
+                {project.links.map((link, linkIndex) => (
+                  <a
+                    key={linkIndex}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={link.icon === Globe ? styles.demoLink : ""}
+                  >
+                    <link.icon size={18} /> {link.text}
+                  </a>
+                ))}
+              </div>
             </div>
           ))}
         </div>
