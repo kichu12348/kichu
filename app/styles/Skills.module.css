@@ -112,7 +112,7 @@
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  cursor: default;
+  cursor: none;
   height: 130px;
 }
 
