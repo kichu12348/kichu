@@ -3,22 +3,27 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "../page.module.css";
 import { useEffect, useRef } from "react";
-import { Code, LayoutGrid, Cpu, Sparkles } from "lucide-react";
+import { RiJavascriptLine } from "react-icons/ri";
+import { FaReact } from "react-icons/fa6";
+import { TbBrandNodejs } from "react-icons/tb";
+import { IoMdGitMerge } from "react-icons/io";
 
 export default function HeroSection() {
   // const [particlePosition, setParticlePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
+
+  const height = useRef(300); 
   
   const opacityTransform = useTransform(
     scrollY,
-    [0, 300],
+    [0, height.current], // this range is rn 0 to 300px ie the height of the hero section
     [1, 0]
   );
   
   const yPosTransform = useTransform(
     scrollY,
-    [0, 300],
+    [0, height.current], // this range is rn 0 to 300px ie the height of the hero section
     [0, -50]
   );
 
@@ -27,6 +32,7 @@ export default function HeroSection() {
     if (h1Element) {
       h1Element.setAttribute('data-text', h1Element.textContent);
     }
+    height.current=window.innerHeight; // set the height to the window height
     // const handleMouseMove = (e) => {
     //   if (heroRef.current) {
     //     const rect = heroRef.current.getBoundingClientRect();
@@ -42,10 +48,10 @@ export default function HeroSection() {
 
   // Badge items
   const techBadges = [
-    { icon: <Code size={16} />, label: "JavaScript" },
-    { icon: <LayoutGrid size={16} />, label: "React" },
-    { icon: <Cpu size={16} />, label: "Node.js" },
-    { icon: <Sparkles size={16} />, label: "Web3" },
+    { icon: <RiJavascriptLine size={16} />, label: "JavaScript" },
+    { icon: <FaReact size={16} />, label: "React" },
+    { icon: <TbBrandNodejs size={16} />, label: "Node.js" },
+    { icon: <IoMdGitMerge size={16} />, label: "Git" },
   ];
 
   return (

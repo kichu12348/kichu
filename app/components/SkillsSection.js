@@ -21,8 +21,9 @@ import {
   RiNextjsLine,
   RiSupabaseLine,
 } from "react-icons/ri";
-import { TbBrandReactNative, TbBrandTypescript } from "react-icons/tb";
+import { TbBrandNodejs, TbBrandReactNative, TbBrandTypescript } from "react-icons/tb";
 import { FaJava, FaReact } from "react-icons/fa6";
+
 
 const skillCategories = [
   {
@@ -42,7 +43,7 @@ const skillCategories = [
     title: "Backend",
     icon: <Server size={20} />,
     techItems: [
-      { name: "Node.js", icon: <Terminal size={24} /> },
+      { name: "Node.js", icon: <TbBrandNodejs size={24} /> },
       { name: "Deno", icon: <SiDeno size={24} /> },
       { name: "Express", icon: <SiExpress size={24} /> },
       { name: "Hono", icon: <SiHono size={24} /> },
