@@ -139,7 +139,7 @@ export default function Terminal() {
           //evaluate the echoText to remove any HTML tags and escape characters
           let cleanedText="";
           try {
-            cleanedText = eval(`\`${echoText}\``); // Using template literals to evaluate the string
+            cleanedText = `${eval(echoText)}`; // Using template literals to evaluate the string
           } catch (e) {
             cleanedText = "Error: Invalid expression";
           }
