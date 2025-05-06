@@ -37,11 +37,11 @@ export default function Terminal() {
 
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
     const typeLine = async (line, charDelay = 50) => {
-      setOutputLines(prev => [...prev, line[0] || ""]);
+      setOutputLines((prev) => [...prev, line[0] || ""]);
       if (line.length <= 1) return;
       for (let i = 1; i < line.length; i++) {
         await delay(charDelay);
-        setOutputLines(prev => {
+        setOutputLines((prev) => {
           const lastLine = prev[prev.length - 1];
           return [...prev.slice(0, -1), lastLine + line[i]];
         });
@@ -77,33 +77,53 @@ export default function Terminal() {
         await delay(500);
         await typeLine("Core functions rerouting... Standby...", 75);
         await delay(1500);
-        
-        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!"]);
+
+        setOutputLines((prev) => [
+          ...prev,
+          "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!",
+        ]);
         await delay(300);
-        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!"]);
+        setOutputLines((prev) => [
+          ...prev,
+          "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!",
+        ]);
         await delay(300);
-        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!!"]);
+        setOutputLines((prev) => [
+          ...prev,
+          "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!!",
+        ]);
         await delay(300);
 
-        setOutputLines(prev => [...prev, "Initiating emergency visual override..."]);
+        setOutputLines((prev) => [
+          ...prev,
+          "Initiating emergency visual override...",
+        ]);
         await delay(1000);
-        setOutputLines(prev => [...prev, "[SYSTEM_SOUND: LOW_RUMBLE.WAV]"]);
+        setOutputLines((prev) => [...prev, "[SYSTEM_SOUND: LOW_RUMBLE.WAV]"]);
         await delay(1000);
 
-        setOutputLines(prev => [...prev, "Reconfiguring reality matrix..."]);
+        setOutputLines((prev) => [...prev, "Reconfiguring reality matrix..."]);
         await delay(1000);
-        setOutputLines(prev => [...prev, "Applying 'DARK_KNIGHT' visual theme..."]);
+        setOutputLines((prev) => [
+          ...prev,
+          "Applying 'DARK_KNIGHT' visual theme...",
+        ]);
         await delay(1500);
-        
+
         setOutputLines(() => [""]);
         await delay(500);
-        setOutputLines(prev => [...prev, "██████████████████████████████████████████████████"]);
+        setOutputLines((prev) => [
+          ...prev,
+          "██████████████████████████████████████████████████",
+        ]);
         await delay(100);
-        setOutputLines(prev => [...prev, "██████████████████████████████████████████████████"]);
+        setOutputLines((prev) => [
+          ...prev,
+          "██████████████████████████████████████████████████",
+        ]);
         await delay(100);
-        setOutputLines(prev => [...prev, ""]);
+        setOutputLines((prev) => [...prev, ""]);
         await delay(500);
-
 
         const batmanArt = [
           "==================================================",
@@ -123,9 +143,12 @@ export default function Terminal() {
         for (const line of batmanArt) {
           await typeLine(line, 10);
         }
-        
+
         await delay(1000);
-        await typeLine("System integrity questionable. Proceed with caution.", 75);
+        await typeLine(
+          "System integrity questionable. Proceed with caution.",
+          75
+        );
         await delay(500);
         await typeLine("The city is safe... for now.", 75);
         setOutputLines((prev) => [...prev, ""]);
@@ -137,18 +160,32 @@ export default function Terminal() {
         if (command?.startsWith("echo")) {
           const echoText = command.slice(5).trim();
           //evaluate the echoText to remove any HTML tags and escape characters
-          let cleanedText="";
+          let cleanedText = "";
           try {
             cleanedText = `${eval(echoText)}`; // Using template literals to evaluate the string
+            setOutputLines((prev) => [...prev, cleanedText, ""]);
           } catch (e) {
             cleanedText = "Error: Invalid expression";
+            setOutputLines((prev) => [
+              ...prev,
+              "Error:",
+              `   ${echoText}`,
+              `${Array.from({ length: echoText.length }, (_, i) => " ").join(
+                ""
+              )}^`,
+              "Invalid expression.",
+              "",
+            ]);
           }
-          setOutputLines((prev) => [...prev, cleanedText, ""]);
         } else {
           setOutputLines((prev) => [
             ...prev,
-            `Error: Command not recognized: ${command}`,
-            "",
+            "Error:",
+            `   ${command}`,
+            `${Array.from({ length: command.length }, (_, i) => " ").join(
+              ""
+            )}^`,
+            `Invalid command. Type "help" for a list of commands.`,
           ]);
         }
     }
@@ -167,9 +204,11 @@ export default function Terminal() {
     }
   };
 
-  useEffect(()=>{
-    document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
-  },[])
+  useEffect(() => {
+    document.head
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", "#000000");
+  }, []);
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "auto" });
@@ -195,7 +234,7 @@ export default function Terminal() {
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: line?.replace(/ /g, "&nbsp;"), 
+                    __html: line?.replace(/ /g, "&nbsp;"),
                   }}
                 />
               )}
