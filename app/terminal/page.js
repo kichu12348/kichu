@@ -165,7 +165,7 @@ export default function Terminal() {
   };
 
   useEffect(()=>{
-    document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
+    document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
   },[])
 
   useEffect(() => {
