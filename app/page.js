@@ -77,6 +77,10 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(()=>{
+    document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'rgb(248, 250, 252)');
+  },[])
+
   useEffect(() => {
     document.body.setAttribute('data-quantum-state', quantumState);
 

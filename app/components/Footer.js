@@ -14,6 +14,7 @@ export default function Footer() {
     setTimeout(() => {
       setShowBatman(false);
       setBatmanActive(false);
+      window.open('/terminal');
     }, 3500);
   };
 
