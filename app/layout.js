@@ -11,6 +11,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata = {
   title: "Mahadevan Reji",
   description: "Full Stack Developer specializing in React, Node.js, Next.js and modern web technologies with experience building scalable applications",

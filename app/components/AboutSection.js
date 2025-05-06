@@ -16,7 +16,7 @@ const AboutSection = forwardRef((props, ref) => {
         <h2 className={styles.sectionTitle}>About Me</h2>
         <div className={styles.aboutContent}>
           <p>
-            I&apos;m a passionate full-stack developer currently pursuing Computer
+            I&apos;m a full-stack developer currently pursuing Computer
             Science Engineering at College of Engineering Chengannur. With
             expertise in modern web technologies and a strong foundation in
             systems programming, I build scalable, efficient solutions that
