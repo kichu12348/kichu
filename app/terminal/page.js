@@ -136,10 +136,13 @@ export default function Terminal() {
       default:
         if (command?.startsWith("echo")) {
           const echoText = command.slice(5).trim();
-          const cleanedText = echoText
-            .replace(/['"]+/g, "")
-            .replace(/\s+/g, " ")
-            .trim();
+          //evaluate the echoText to remove any HTML tags and escape characters
+          let cleanedText="";
+          try {
+            cleanedText = eval(`\`${echoText}\``); // Using template literals to evaluate the string
+          } catch (e) {
+            cleanedText = "Error: Invalid expression";
+          }
           setOutputLines((prev) => [...prev, cleanedText, ""]);
         } else {
           setOutputLines((prev) => [
