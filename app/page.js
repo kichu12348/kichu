@@ -55,7 +55,7 @@ export default function Home() {
       const scrollPosition = window.scrollY;
       const height = document.body.scrollHeight - window.innerHeight;
       const scrollPercentage = scrollPosition / height;
-      
+      const body = document.body;
       if (scrollPercentage < 0.2) {
         setQuantumState(0);
       } else if (scrollPercentage < 0.5) {
@@ -64,8 +64,10 @@ export default function Home() {
         setQuantumState(2);
         setCyberpunkMode(false);
         document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'rgb(248, 250, 252)');
+        body.style.setProperty('--scrollbar-track-color', 'rgba(240, 242, 245, 0.8)');
       } else {
         document.head.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'rgb(18, 24, 38)');
+        body.style.setProperty('--scrollbar-track-color', 'rgba(12, 15, 26, 0.8)');
         setQuantumState(3);
         setCyberpunkMode(true);
       }

@@ -27,15 +27,15 @@ body {
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(240, 242, 245, 0.8);
+body::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, rgb(142, 70, 186), rgb(72, 149, 239));
   border-radius: 4px;
 }

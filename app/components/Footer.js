@@ -1,6 +1,7 @@
 import styles from "../page.module.css";
 import { useState } from "react";
 import BatmanEasterEgg from "./betmen";
+import { FaHeart } from "react-icons/fa";
 
 export default function Footer() {
   const [showBatman, setShowBatman] = useState(false);
@@ -26,7 +27,16 @@ export default function Footer() {
         <p className={styles.footerText} onClick={handleBatmanClick}>
           Made with{" "}
           <span role="img" aria-label="love">
-            ❤️
+            <FaHeart 
+            className={styles.heartIcon}
+            color="red"
+            size={"1em"}
+            style={{
+              transition: "all 0.3s ease-in-out",
+              transform: batmanActive ? "scale(1.2)" : "scale(1)",
+              filter: batmanActive ? "drop-shadow(0 0 5px red)" : "none",
+            }}
+             />
           </span>{" "}
           by Kichu A.K.A{" "}
           <span

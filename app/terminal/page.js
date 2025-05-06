@@ -14,12 +14,13 @@ const aboutMeText = [
   "high-level web frameworks to low-level systems programming. This",
   "diverse background allows me to approach problems from multiple",
   "perspectives and choose the right tool for each job.",
+  "",
 ];
 
 const initialMessage = [
-  "[Version 20.5.6]",
+  "[Version 24.02.05]",
   "(c) Kichu Corp. All rights reserved.",
-  "Type 'help' for a list of commands.",
+  `Type "help" for a list of commands.`,
   "",
 ];
 
@@ -34,51 +35,79 @@ export default function Terminal() {
     setIsProcessing(true);
     setOutputLines((prev) => [...prev, `> ${command}`]);
 
-    // Simulate delay for realism
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+    const typeLine = async (line, charDelay = 50) => {
+      setOutputLines(prev => [...prev, line[0] || ""]);
+      if (line.length <= 1) return;
+      for (let i = 1; i < line.length; i++) {
+        await delay(charDelay);
+        setOutputLines(prev => {
+          const lastLine = prev[prev.length - 1];
+          return [...prev.slice(0, -1), lastLine + line[i]];
+        });
+      }
+    };
 
     switch (command.toLowerCase().trim()) {
       case "help":
         setOutputLines((prev) => [
           ...prev,
           "Available commands:",
-          "  start about.exe   - Display information about me",
-          "  run betmen.exe    - Activate Batman mode",
+          "  run about.exe     - Display information about me",
+          "  run betmen.exe    - Activate Betmen mode",
           "  clear             - Clear the terminal screen",
           "  help              - Show this help message",
           "",
         ]);
         break;
-      case "start about.exe":
+      case "run about.exe":
         for (const line of aboutMeText) {
-          await delay(50);
-          setOutputLines((prev) => [...prev, line]);
+          await typeLine(line, 30);
         }
         setOutputLines((prev) => [...prev, ""]);
         break;
       case "run betmen.exe":
-        setOutputLines((prev) => [
-          ...prev,
-          "Initializing Bat-Signal protocol...",
-        ]);
+        await typeLine("Initializing Bat-Signal protocol...", 75);
         await delay(1000);
-        setOutputLines((prev) => [
-          ...prev,
-          "WARNING: System instability detected!",
-        ]);
+        await typeLine("WARNING: System instability detected!", 75);
+        await delay(500);
+        await typeLine("Unauthorized access attempt from 'THE_CAVES'...", 75);
         await delay(1000);
-        setOutputLines((prev) => [...prev, "Memory integrity compromised..."]);
+        await typeLine("Memory integrity compromised...", 75);
+        await delay(500);
+        await typeLine("Core functions rerouting... Standby...", 75);
         await delay(1500);
-        setOutputLines((prev) => [...prev, "Reconfiguring reality matrix..."]);
+        
+        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!"]);
+        await delay(300);
+        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!"]);
+        await delay(300);
+        setOutputLines(prev => [...prev, "SYSTEM ALERT: CRITICAL FAILURE IMMINENT!!!"]);
+        await delay(300);
+
+        setOutputLines(prev => [...prev, "Initiating emergency visual override..."]);
         await delay(1000);
-        setOutputLines((prev) => [...prev, ""]);
-        // Clear screen for dramatic effect
+        setOutputLines(prev => [...prev, "[SYSTEM_SOUND: LOW_RUMBLE.WAV]"]);
+        await delay(1000);
+
+        setOutputLines(prev => [...prev, "Reconfiguring reality matrix..."]);
+        await delay(1000);
+        setOutputLines(prev => [...prev, "Applying 'DARK_KNIGHT' visual theme..."]);
+        await delay(1500);
+        
         setOutputLines(() => [""]);
         await delay(500);
+        setOutputLines(prev => [...prev, "██████████████████████████████████████████████████"]);
+        await delay(100);
+        setOutputLines(prev => [...prev, "██████████████████████████████████████████████████"]);
+        await delay(100);
+        setOutputLines(prev => [...prev, ""]);
+        await delay(500);
+
 
         const batmanArt = [
           "==================================================",
-          "               HELLO BATMAN",
+          "               I'M BETMEN",
           "==================================================",
           "⠀⠀⠀⠀⠀⠀⢀⣀⡠⠤⠤⠴⠶⠶⠶⠶⠦⠤⠤⢄⣀⡀⠀⠀⠀⠀⠀⠀⠀",
           "⠀⠀⠀⣠⠖⢛⣩⣤⠂⠀⠀⠀⣶⡀⢀⣶⠀⠀⠀⠐⣤⣍⡛⠲⣄⠀⠀⠀⠀",
@@ -90,30 +119,23 @@ export default function Terminal() {
           "⠀⠀⠀⠉⠲⢤⣀⡀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⢀⣀⡤⠖⠉⠀⠀⠀⠀",
           "⠀⠀⠀⠀⠀⠀⠈⠉⠉⠐⠒⠒⠒⠒⠒⠒⠒⠒⠒⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀",
           "",
-          "System integrity questionable. Proceed with caution.",
-          "",
         ];
         for (const line of batmanArt) {
-          await delay(100);
-          setOutputLines((prev) => [...prev, line]);
+          await typeLine(line, 10);
         }
+        
+        await delay(1000);
+        await typeLine("System integrity questionable. Proceed with caution.", 75);
+        await delay(500);
+        await typeLine("The city is safe... for now.", 75);
+        setOutputLines((prev) => [...prev, ""]);
         break;
       case "clear":
         setOutputLines([...initialMessage]);
         break;
-      //   case command.includes("echo"):
-      //     const echoText = command.slice(5).trim(); // Remove 'echo ' from the command
-      //     //remove extra spaces and "" or '' from the text
-      //     const cleanedText = echoText
-      //       .replace(/['"]+/g, "")
-      //       .replace(/\s+/g, " ")
-      //       .trim();
-      //     setOutputLines((prev) => [...prev, `> ${command}`, cleanedText, ""]);
-      //     break;
       default:
-        if (command.startsWith("echo")) {
-          const echoText = command.slice(5).trim(); // Remove 'echo ' from the command
-          //remove extra spaces and "" or '' from the text
+        if (command?.startsWith("echo")) {
+          const echoText = command.slice(5).trim();
           const cleanedText = echoText
             .replace(/['"]+/g, "")
             .replace(/\s+/g, " ")
@@ -161,13 +183,12 @@ export default function Terminal() {
         <div className={styles.terminalOutput}>
           {outputLines.map((line, index) => (
             <div key={index} className={styles.line}>
-              {/* Basic way to check if it's a user command line */}
-              {line.startsWith("> ") ? (
+              {line?.startsWith("> ") ? (
                 line
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: line.replace(/ /g, "&nbsp;"),
+                    __html: line?.replace(/ /g, "&nbsp;"), 
                   }}
                 />
               )}
@@ -185,7 +206,7 @@ export default function Terminal() {
                 className={styles.terminalInput}
                 disabled={isProcessing}
                 spellCheck="false"
-                style={{ width: `${inputValue.length}ch` }} // Adjust width based on input length
+                style={{ width: `${inputValue.length}ch` }}
               />
               <span className={styles.cursor}></span>
             </div>

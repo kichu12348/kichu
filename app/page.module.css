@@ -1047,3 +1047,7 @@
     0 0 16px #FFD60088;
   transition: color 0.3s, text-shadow 0.3s;
 }
+
+.heartIcon{
+  align-self: center;
+}
