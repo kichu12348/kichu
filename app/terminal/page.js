@@ -28,11 +28,14 @@ export default function Terminal() {
   const [outputLines, setOutputLines] = useState([...initialMessage]);
   const [inputValue, setInputValue] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [allExpressions, setAllExpressions] = useState([]);
   const terminalEndRef = useRef(null);
   const inputRef = useRef(null);
+  const expressionIndex = useRef(0);
 
   const processCommand = async (command) => {
     setIsProcessing(true);
+    setAllExpressions((prev) => [...prev, command]);
     setOutputLines((prev) => [...prev, `> ${command}`]);
 
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -201,6 +204,30 @@ export default function Terminal() {
       e.preventDefault();
       processCommand(inputValue);
       setInputValue("");
+    }
+    return;
+     if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (allExpressions.length > 0) {
+        setInputValue(allExpressions[expressionIndex.current]);
+        expressionIndex.current = expressionIndex.current === allExpressions.length - 1 ? 0 : expressionIndex.current + 1;
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if(inputValue === "") {
+        expressionIndex.current = 0;
+        setInputValue("");
+      }
+      else if (allExpressions.length > 0) {
+        const nextText= allExpressions[expressionIndex.current === 0 ? allExpressions.length - 1 : expressionIndex.current - 1];
+        if(allExpressions[expressionIndex.current] === inputValue){
+          setInputValue("");
+          expressionIndex.current = 0;
+          return;
+        }
+        expressionIndex.current = expressionIndex.current === 0 ? allExpressions.length - 1 : expressionIndex.current - 1;
+        setInputValue(nextText);
+      }
     }
   };
 
