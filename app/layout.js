@@ -43,13 +43,6 @@ export const metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mahadevan Reji | Full Stack Developer",
-    description: "Full Stack Developer specializing in modern web technologies",
-    creator: "@yourtwitterhandle", // Replace with your actual Twitter handle
-    images: ["/og-image.png"],
-  },
   robots: {
     index: true,
     follow: true,

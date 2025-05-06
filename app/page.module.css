@@ -493,228 +493,6 @@
   transform: scaleX(1);
 }
 
-/* About section with quantum card effect */
-.about {
-  min-height: 100vh;
-  padding: 6rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-}
-
-.aboutContent {
-  max-width: 800px;
-  line-height: 1.8;
-  background: rgb(var(--q-light));
-  padding: 2.5rem;
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(var(--q-dark), 0.04);
-  border-left: 4px solid rgb(var(--q-primary));
-  backdrop-filter: blur(10px);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Quantum box shadow that changes on hover */
-.aboutContent:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 15px 30px rgba(var(--q-dark), 0.07),
-    0 0 0 1px rgba(var(--q-primary), 0.05);
-}
-
-/* Gradient slash decoration */
-.aboutContent::before {
-  content: '';
-  position: absolute;
-  width: 40px;
-  height: 120%;
-  background: linear-gradient(
-    -45deg,
-    rgba(var(--q-secondary), 0.3),
-    rgba(var(--q-primary), 0.1),
-    transparent
-  );
-  top: -10%;
-  left: -20px;
-  border-radius: 20px;
-  pointer-events: none;
-}
-
-.aboutContent p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  color: rgba(var(--q-dark), 0.8);
-  position: relative;
-}
-
-/* Projects section with quantum cards */
-.projects {
-  min-height: 100vh;
-  padding: 6rem 2rem;
-  position: relative;
-  z-index: 2;
-}
-
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2rem;
-}
-
-/* Enhanced project cards for detailed case studies */
-.projectCard {
-  border-radius: 12px;
-  padding: 1.75rem;
-  background: rgb(var(--q-light));
-  border: 1px solid rgba(var(--q-primary), 0.1);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 12px rgba(var(--q-dark), 0.06);
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Quantum wave pattern decoration */
-.projectCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(
-    90deg,
-    rgb(var(--q-primary)),
-    rgb(var(--q-secondary))
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.projectCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 30px rgba(var(--q-dark), 0.08);
-  border-color: rgba(var(--q-primary), 0.2);
-}
-
-.projectCard:hover::before {
-  transform: scaleX(1);
-}
-
-.projectCard h3 {
-  margin-bottom: 0.75rem;
-  color: rgb(var(--q-primary));
-  font-weight: 600;
-  position: relative;
-  font-size: 1.4rem;
-}
-
-.projectCard p {
-  margin-bottom: 1rem;
-  color: rgba(var(--q-dark), 0.8);
-  line-height: 1.6;
-}
-
-/* New styles for key features section */
-.keyFeatures {
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
-
-.keyFeatures h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: rgba(var(--q-primary), 0.9);
-  font-family: var(--font-geist-mono);
-}
-
-.keyFeatures ul {
-  list-style-type: none;
-  padding-left: 0.5rem;
-}
-
-.keyFeatures li {
-  position: relative;
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-  color: rgba(var(--q-dark), 0.75);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.keyFeatures li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: rgb(var(--q-secondary));
-}
-
-/* Expanded tech tags for more detail */
-.techTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.techTags span {
-  padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  font-size: 0.75rem;
-  font-family: var(--font-geist-mono);
-  background: rgba(var(--q-secondary), 0.15);
-  color: rgba(var(--q-dark), 0.8);
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.techTags span {
-  padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  font-size: 0.85rem;
-  font-family: var(--font-geist-mono);
-  background: rgba(var(--q-secondary), 0.15);
-  color: rgba(var(--q-dark), 0.8);
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.projectCard:hover .techTags span {
-  background: rgba(var(--q-secondary), 0.2);
-  border-color: rgba(var(--q-primary), 0.1);
-}
-
-.projectLinks {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(var(--q-dark), 0.1);
-}
-
-.projectLinks a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: rgba(var(--q-dark), 0.6);
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.projectLinks a:hover {
-  color: rgb(var(--q-primary));
-  transform: translateX(3px);
-}
-
 /* Education section with quantum timeline */
 .education {
   min-height: 60vh;
@@ -899,50 +677,6 @@
   font-size: 0.9rem;
 }
 
-.collaborators{
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  color: rgba(var(--q-dark), 0.5);
-}
-
-.collab{
-  color: rgb(var(--q-primary));
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1.2rem;
-}
-
-.collab p{
-  margin: 0;
-  font-size: 0.8rem;
-  color: rgba(var(--q-dark), 0.8);
-  font-family: var(--font-geist-mono);
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 2px rgba(var(--q-dark), 0.1);
-}
-
-.collabLinks{
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.collabLinks a{
-  color: rgb(var(--q-primary));
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
 .copyright {
   opacity: 0.8;
 }
@@ -969,10 +703,9 @@
 }
 
 /* In quantum state 3, invert light and dark for a stunning dark mode */
-.container[data-quantum-state="3"] .projectCard,
 .container[data-quantum-state="3"] .timelineContent,
-.container[data-quantum-state="3"] .contactLink,
-.container[data-quantum-state="3"] .aboutContent {
+.container[data-quantum-state="3"] .contactLink
+ {
   background: rgba(var(--q-dark), 0.05);
   backdrop-filter: blur(15px);
   border-color: rgba(var(--q-primary), 0.2);
@@ -981,15 +714,6 @@
 .container[data-quantum-state="3"] .socials {
   background: rgba(var(--q-dark), 0.05);
   border-color: rgba(var(--q-primary), 0.2);
-}
-
-/* Dark mode overrides for new elements */
-.container[data-quantum-state="3"] .keyFeatures h4 {
-  color: rgba(var(--q-primary), 0.9);
-}
-
-.container[data-quantum-state="3"] .keyFeatures li {
-  color: rgba(var(--q-dark), 0.8);
 }
 
 /* Media queries */

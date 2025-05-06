@@ -1,32 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import styles from "../page.module.css";
+import pageStyles from "../page.module.css"; 
+import projectStyles from "../styles/Project.module.css";
 import { forwardRef } from "react";
 import { Globe } from "lucide-react";
 import { projects } from "./constants/projects";
 
 const ProjectsSection = forwardRef((_, ref) => {
   return (
-    <section id="projects" ref={ref} className={styles.projects}>
+    <section id="projects" ref={ref} className={projectStyles.projects}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className={styles.sectionTitle}>Featured Projects</h2>
-        <div className={styles.projectsGrid}>
+        <h2 className={pageStyles.sectionTitle}>Featured Projects</h2>
+        <div className={projectStyles.projectsGrid}>
           {projects.map((project, index) => (
-            <div key={index} className={styles.projectCard}>
+            <div key={index} className={projectStyles.projectCard}>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-              <div className={styles.techTags}>
+              <div className={projectStyles.techTags}>
                 {project.tech.map((tech, techIndex) => (
                   <span key={techIndex}>{tech}</span>
                 ))}
               </div>
-              <div className={styles.keyFeatures}>
+              <div className={projectStyles.keyFeatures}>
                 <h4>Key Features</h4>
                 <ul>
                   {project.features.map((feature, featureIndex) => (
@@ -35,14 +36,14 @@ const ProjectsSection = forwardRef((_, ref) => {
                 </ul>
               </div>
               {project.collaborators && project.collaborators.length > 0 && (
-                <div className={styles.collaborators}>
+                <div className={projectStyles.collaborators}>
                   <h4>
                     Collaborator{project.collaborators.length > 1 ? "s" : ""}
                   </h4>
                   {project.collaborators.map((collab, collabIndex) => (
-                    <div key={collabIndex} className={styles.collab}>
+                    <div key={collabIndex} className={projectStyles.collab}>
                       <p>{collab.name}</p>
-                      <div className={styles.collabLinks}>
+                      <div className={projectStyles.collabLinks}>
                         {collab.uri.map((uri, uriIndex) => (
                           <a
                             key={uriIndex}
@@ -58,14 +59,14 @@ const ProjectsSection = forwardRef((_, ref) => {
                   ))}
                 </div>
               )}
-              <div className={styles.projectLinks}>
+              <div className={projectStyles.projectLinks}>
                 {project.links.map((link, linkIndex) => (
                   <a
                     key={linkIndex}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={link.icon === Globe ? styles.demoLink : ""}
+                    className={link.icon === Globe ? projectStyles.demoLink : ""}
                   >
                     <link.icon size={18} /> {link.text}
                   </a>
