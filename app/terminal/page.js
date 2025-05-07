@@ -1,6 +1,6 @@
 "use client";
 import styles from "./terminal.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 
 const aboutMeText = [
   "I'm a full-stack developer currently pursuing Computer",
@@ -28,10 +28,18 @@ export default function Terminal() {
   const [outputLines, setOutputLines] = useState([...initialMessage]);
   const [inputValue, setInputValue] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const [allExpressions, setAllExpressions] = useState([]);
+
   const terminalEndRef = useRef(null);
   const inputRef = useRef(null);
-  const expressionIndex = useRef(0);
+  const expressionIndex = useRef(-1);
+  const allExpressions = useRef([]);
+
+  const setAllExpressions = (newValue) => {
+    if (typeof newValue === "function")
+      allExpressions.current = newValue(allExpressions.current);
+    else allExpressions.current = newValue;
+    expressionIndex.current++;
+  };
 
   const processCommand = async (command) => {
     setIsProcessing(true);
@@ -199,35 +207,33 @@ export default function Terminal() {
     setInputValue(e.target.value);
   };
 
+  //blah blah blah blah blah blah
   const handleInputSubmit = (e) => {
     if (e.key === "Enter" && !isProcessing) {
       e.preventDefault();
       processCommand(inputValue);
       setInputValue("");
-    }
-    return;
-     if (e.key === "ArrowUp") {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      if (allExpressions.length > 0) {
-        setInputValue(allExpressions[expressionIndex.current]);
-        expressionIndex.current = expressionIndex.current === allExpressions.length - 1 ? 0 : expressionIndex.current + 1;
+      if (allExpressions.current?.length > 0) {
+        const next = allExpressions.current[expressionIndex.current];
+        setInputValue(next ? next : "");
+        if (!next) return;
+        expressionIndex.current =
+          expressionIndex.current === 0 ? 0 : expressionIndex.current - 1;
       }
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      if(inputValue === "") {
-        expressionIndex.current = 0;
-        setInputValue("");
+      if (inputValue === "") {
+        return;
       }
-      else if (allExpressions.length > 0) {
-        const nextText= allExpressions[expressionIndex.current === 0 ? allExpressions.length - 1 : expressionIndex.current - 1];
-        if(allExpressions[expressionIndex.current] === inputValue){
-          setInputValue("");
-          expressionIndex.current = 0;
-          return;
-        }
-        expressionIndex.current = expressionIndex.current === 0 ? allExpressions.length - 1 : expressionIndex.current - 1;
-        setInputValue(nextText);
-      }
+      expressionIndex.current =
+        expressionIndex.current + 1 >= allExpressions.current.length - 1
+          ? allExpressions.current.length - 1
+          : expressionIndex.current + 1;
+      const next = allExpressions.current[expressionIndex.current];
+      if (next === undefined || next === inputValue) return setInputValue("");
+      setInputValue(next ? next : "");
     }
   };
 
@@ -279,7 +285,7 @@ export default function Terminal() {
                 className={styles.terminalInput}
                 disabled={isProcessing}
                 spellCheck="false"
-                style={{ width: `${inputValue.length}ch` }}
+                style={{ width: `${inputValue?.length}ch` }}
               />
               <span className={styles.cursor}></span>
             </div>
