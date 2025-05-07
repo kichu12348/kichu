@@ -1,6 +1,6 @@
 "use client";
 import styles from "./terminal.module.css";
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 
 const aboutMeText = [
   "I'm a full-stack developer currently pursuing Computer",
@@ -34,7 +34,112 @@ export default function Terminal() {
   const expressionIndex = useRef(-1);
   const allExpressions = useRef([]);
   const loc = useRef(null);
+  const videoRef = useRef(null);
 
+  function asciiVideo(video, outputFn) {
+    const asciiChars = ". ";
+
+    const width = 60;
+    const height = 30;
+
+    const container = document.createElement("div");
+    container.style.fontFamily = "monospace";
+    container.style.lineHeight = "1";
+    container.style.whiteSpace = "pre";
+    container.style.fontSize = "10px";
+    container.style.letterSpacing = "0px";
+
+    container.style.position = "absolute";
+    container.style.left = "-9999px";
+    document.body.appendChild(container);
+
+    video.crossOrigin = "anonymous";
+    video.autoplay = true;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+    let isRendering = true;
+    let lastFrameTime = 0;
+    const frameDelay = 1000 / 15;
+
+    const cleanup = (n) => {
+      isRendering = false;
+      video.pause();
+      if (container && document.body.contains(container)) {
+        document.body.removeChild(container);
+      }
+      outputFn("");
+    };
+
+    video.addEventListener("play", () => {
+      renderFrame(0);
+    });
+
+
+    video.play().catch(() => {
+      const clickHandler = () => {
+        video.play().catch((err) => {
+          cleanup(3);
+        });
+        document.removeEventListener("click", clickHandler);
+      };
+
+      document.addEventListener("click", clickHandler);
+    });
+
+    function renderFrame(timestamp) {
+      if (!isRendering) return;
+
+      if (timestamp - lastFrameTime < frameDelay) {
+        requestAnimationFrame(renderFrame);
+        return;
+      }
+
+      lastFrameTime = timestamp;
+
+      if (video.paused || video.ended) {
+        cleanup(4);
+        return;
+      }
+
+      ctx.drawImage(video, 0, 0, width, height);
+      const imageData = ctx.getImageData(0, 0, width, height);
+      const data = imageData.data;
+
+      let asciiFrame = "";
+      for (let y = 0; y < height; y++) {
+        if (!isRendering) return;
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          const r = data[idx];
+          const g = data[idx + 1];
+          const b = data[idx + 2];
+
+          const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
+          const charIndex = brightness < 0.5 ? 0 : 1;
+          asciiFrame += asciiChars[charIndex];
+        }
+        asciiFrame += "\n";
+      }
+
+      
+      if (isRendering) {
+        outputFn(asciiFrame);
+        requestAnimationFrame(renderFrame);
+      }
+    }
+    return cleanup;
+  }
+
+  useEffect(() => {
+    const video = document.createElement("video");
+    video.src = "/vids/rolls.mp4";
+    video.preload = "auto";
+    videoRef.current = video;
+  }, []);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -48,7 +153,8 @@ export default function Terminal() {
       }
     };
     fetchLocation();
-  },[]);
+
+  }, []);
 
   const setAllExpressions = (newValue) => {
     if (typeof newValue === "function")
@@ -84,6 +190,8 @@ export default function Terminal() {
           "  run betmen.exe    - Activate Betmen mode",
           "  clear             - Clear the terminal screen",
           "  help              - Show this help message",
+          `  echo "expression" - Echo the text back`,
+          "  run notsus.exe    - Defo not a sus",
           "",
         ]);
         break;
@@ -99,7 +207,12 @@ export default function Terminal() {
         await typeLine("WARNING: System instability detected!", 75);
         await delay(500);
         await typeLine("Unauthorized access attempt from...", 75);
-        await typeLine(loc.current?`${loc.current.city}  ${loc.current.ip}`:`"THE CAVES"`, 75);
+        await typeLine(
+          loc.current
+            ? `${loc.current.city}  ${loc.current.ip}`
+            : `"THE CAVES"`,
+          75
+        );
         await delay(1000);
         await typeLine("Memory integrity compromised...", 75);
         await delay(500);
@@ -183,6 +296,46 @@ export default function Terminal() {
         break;
       case "clear":
         setOutputLines([...initialMessage]);
+        break;
+
+      case "run notsus.exe":
+        await typeLine("loadin heh 😼...", 50);
+        await delay(500);
+        setOutputLines((prev) => [...prev, ""]);
+        asciiVideo(
+          videoRef.current,
+          (asciiFrame) => {
+            if (!asciiFrame) {
+              setOutputLines((prev) => {
+                const frameIndex = prev.findIndex((line) =>
+                  line.startsWith("ASCII_FRAME_MARKER")
+                );
+
+                if (frameIndex >= 0) {
+                  //const newLines = [...prev.slice(0, frameIndex)];
+                  return [...initialMessage, ""];
+                } else {
+                  return [...initialMessage, ""];
+                }
+              });
+              return;
+            }
+
+            setOutputLines((prev) => {
+              const frameIndex = prev.findIndex((line) =>
+                line.startsWith("ASCII_FRAME_MARKER")
+              );
+
+              if (frameIndex >= 0) {
+                const newLines = [...prev];
+                newLines[frameIndex] = "ASCII_FRAME_MARKER" + asciiFrame;
+                return newLines;
+              } else {
+                return [...prev, "ASCII_FRAME_MARKER" + asciiFrame];
+              }
+            });
+          }
+        );
         break;
       default:
         if (command?.startsWith("echo")) {
@@ -277,10 +430,14 @@ export default function Terminal() {
     >
       <div className={styles.terminalScreen}>
         <div className={styles.terminalOutput}>
-          {outputLines.map((line, index) => (
+          {outputLines?.map((line, index) => (
             <div key={index} className={styles.line}>
               {line?.startsWith("> ") ? (
                 line
+              ) : line?.startsWith("ASCII_FRAME_MARKER") ? (
+                <pre className={styles.asciiArt}>
+                  {line.replace("ASCII_FRAME_MARKER", "")}
+                </pre>
               ) : (
                 <span
                   dangerouslySetInnerHTML={{

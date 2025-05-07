@@ -59,11 +59,13 @@
   font-size: 1rem; 
   line-height: 1.5;
   flex-grow: 1;
+  overflow-x: auto; /* Allow horizontal scrolling for ASCII art */
 }
 
 .line {
   display: flex; 
   min-height: 1.5em; 
+  min-width: min-content; /* Ensure lines don't get truncated */
 }
 
 .prompt {
@@ -141,6 +143,32 @@
   z-index: 0; 
 }
 
+.asciiArt {
+  font-family: monospace;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: pre;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: #ffd700;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+  transform-origin: top left;
+  transform: scale(1);
+}
+
+@media (min-width: 768px) {
+  .asciiArt {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .asciiArt {
+    font-size: 12px;
+  }
+}
 
 @media (max-width: 768px) {
   .terminalScreen {
