@@ -19,7 +19,7 @@ const aboutMeText = [
 
 const initialMessage = [
   "[Version 24.02.05]",
-  "(c) Kichu Corp. All rights reserved.",
+  "(c) Kichu Not Evil Corp. All rights reserved.",
   `Type "help" for a list of commands.`,
   "",
 ];
