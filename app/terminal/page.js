@@ -1,6 +1,6 @@
 "use client";
 import styles from "./terminal.module.css";
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, useRef} from "react";
 
 const aboutMeText = [
   "I'm a full-stack developer currently pursuing Computer",
@@ -33,6 +33,22 @@ export default function Terminal() {
   const inputRef = useRef(null);
   const expressionIndex = useRef(-1);
   const allExpressions = useRef([]);
+  const loc = useRef(null);
+
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json");
+        if (!response.ok) throw new Error("Network response was not ok😞");
+        const data = await response.json();
+        loc.current = data;
+      } catch (error) {
+        console.error("Error fetching location:", error);
+      }
+    };
+    fetchLocation();
+  },[]);
 
   const setAllExpressions = (newValue) => {
     if (typeof newValue === "function")
