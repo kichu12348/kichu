@@ -82,7 +82,8 @@ export default function Terminal() {
         await delay(1000);
         await typeLine("WARNING: System instability detected!", 75);
         await delay(500);
-        await typeLine("Unauthorized access attempt from 'THE_CAVES'...", 75);
+        await typeLine("Unauthorized access attempt from...", 75);
+        await typeLine(loc.current?`${loc.current.city}  ${loc.current.ip}`:`"THE CAVES"`, 75);
         await delay(1000);
         await typeLine("Memory integrity compromised...", 75);
         await delay(500);
