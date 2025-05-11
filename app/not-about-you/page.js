@@ -486,7 +486,7 @@ export default function NotAboutYou() {
 
               {revealStep === 1 && (
                 <p className={styles.revealText}>
-                  Okie... maybe it's a&nbsp;
+                  Okie... maybe it&apos;s a&nbsp;
                   <em className={styles.inlineEm}>tiny bit</em>&nbsp;about you.
                 </p>
               )}
@@ -494,16 +494,11 @@ export default function NotAboutYou() {
               {revealStep === 2 && (
                 <p className={styles.revealText}>
                   Actually, yeah. This whole thing is for you,&nbsp;
-<<<<<<< HEAD
                   <span>{name}</span>.
-                  <p className={styles.heart}>
+                  <span className={styles.heart}>
                     <IoHeart />
-                  </p>
-                </span>
-=======
-                  <span className={styles.nameBef}>{name}</span>.<span className={styles.heart}>❤</span>
+                  </span>
                 </p>
->>>>>>> d00fd44e538b65fbd6d3656cc663c7216fc9059e
               )}
 
               {showProceedToCompliments && revealStep === 2 && (
@@ -631,7 +626,12 @@ export default function NotAboutYou() {
                 </p>
                 <ul className={styles.complimentList}>
                   {compliments.map((comp, index) => (
-                    <li key={index}>{comp.text}</li>
+                    <li key={index}>
+                      <span className={styles.stampIcon}>
+                        <FaHeart/>
+                      </span>
+                      {comp.text}
+                      </li>
                   ))}
                 </ul>
 

@@ -599,11 +599,13 @@
   white-space: normal;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  text-align: right;
 
   span {
     color: var(--color-primary);
+    white-space: nowrap;
   }
 }
 
@@ -666,40 +668,6 @@
   top: 50%;
   left: 50%;
   animation-delay: 1.6s;
-}
-
-<<<<<<< HEAD
-.revealText span {
-=======
-.revealText {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: var(--color-text-ink);
-  line-height: 1.4;
-  margin: 20px 0;
-  min-height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  text-align: center;
-  font-family: "Indie Flower", cursive;
-}
-
-.revealText .nameBef{
->>>>>>> d00fd44e538b65fbd6d3656cc663c7216fc9059e
-  color: var(--color-text-marker);
-  position: relative;
-}
-
-.revealText .nameBef::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 100%;
-  height: 2px;
-  background: var(--color-text-marker);
 }
 
 .heart {
@@ -1113,6 +1081,8 @@
   background: var(--color-bg-paper);
 }
 
+
+
 .letterHeader h3 {
   font-size: 1.4rem;
   color: var(--color-text-ink);
@@ -1142,6 +1112,12 @@
   padding-left: 20px;
   margin-bottom: 20px;
 }
+.stampIcon{
+  color: var(--color-heart);
+  position: absolute;
+  left: -25px;
+  font-size: 1.2rem;
+}
 
 .complimentList li {
   margin-bottom: 8px;
@@ -1152,12 +1128,15 @@
   word-wrap: break-word;
 }
 
-.complimentList li::before {
-  content: "❤";
+/* .complimentList li::before {
+  content: "";
   position: absolute;
   left: -20px;
   color: var(--color-heart);
-}
+  .stampIcon{
+    display: inline;
+  }
+} */
 
 .letterFooter {
   text-align: center;
@@ -1181,6 +1160,10 @@
   padding: 8px 15px;
   border-radius: 5px;
   transform: rotate(-20deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .letterIntro,
@@ -1274,6 +1257,9 @@
   }
   .revealText {
     width: 95vw;
+    align-items: flex-end;
+    justify-content: flex-end;
+   
   }
 
   .revealContainer {
