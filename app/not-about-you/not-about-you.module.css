@@ -648,12 +648,12 @@
   font-family: "Indie Flower", cursive;
 }
 
-.revealText span {
+.revealText .nameBef{
   color: var(--color-text-marker);
   position: relative;
 }
 
-.revealText span::after {
+.revealText .nameBef::after {
   content: "";
   position: absolute;
   left: 0;
