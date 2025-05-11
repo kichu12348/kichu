@@ -59,13 +59,13 @@
   font-size: 1rem; 
   line-height: 1.5;
   flex-grow: 1;
-  overflow-x: auto; /* Allow horizontal scrolling for ASCII art */
+  overflow-x: auto; 
 }
 
 .line {
   display: flex; 
   min-height: 1.5em; 
-  min-width: min-content; /* Ensure lines don't get truncated */
+  min-width: min-content; 
 }
 
 .prompt {

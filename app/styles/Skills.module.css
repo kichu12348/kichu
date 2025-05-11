@@ -1,4 +1,4 @@
-/* Skills section with quantum grid */
+
 .skills {
   min-height: 100vh;
   padding: 6rem 2rem;
@@ -19,7 +19,7 @@
   z-index: 1;
 }
 
-/* Probability gradient underline */
+
 .sectionTitle::after {
   content: '';
   position: absolute;
@@ -73,7 +73,7 @@
   font-size: 1.5rem;
 }
 
-/* Quantum field line */
+
 .categoryTitle::after {
   content: '';
   position: absolute;
@@ -116,7 +116,7 @@
   height: 130px;
 }
 
-/* Quantum probability cloud effect */
+
 .techCard::before {
   content: '';
   position: absolute;
@@ -173,14 +173,14 @@
   z-index: 1;
 }
 
-/* Dark mode styles */
+
 :global(.container[data-quantum-state="3"]) .techCard {
   background: rgba(var(--q-dark), 0.05);
   backdrop-filter: blur(15px);
   border-color: rgba(var(--q-primary), 0.2);
 }
 
-/* Media queries */
+
 @media (max-width: 768px) {
   .techCards {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));

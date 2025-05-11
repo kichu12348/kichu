@@ -1,0 +1,37 @@
+:root {
+  --color-primary: #FF8AAE;         
+  --color-secondary: #FFDD95;       
+  --color-accent: #B5DEFF;          
+  --color-pop: #CF9FFF;             
+  
+  
+  --color-bg-paper: #FFFAF2;        
+  --color-bg-envelope: #FFDDD6;     
+  --color-bg-note: #FFFBEB;         
+  --color-bg-polaroid: #FFFFFF;     
+  
+  /*stuff*/
+  --color-text-ink: #3D3B40;        
+  --color-text-pencil: #6D6875;     
+  --color-text-marker: #FF5C8D;     
+  
+  
+  --color-heart: #FF5C8D;           
+  --color-star: #FFD55A;            
+  --color-sparkle: #C1F0F6;         
+  
+  
+  --gradient-love-letter: linear-gradient(135deg, #FFF0F3 0%, #FFDDDD 100%);
+  --gradient-sunset-note: linear-gradient(135deg, #FFDAB9 0%, #FFC0CB 100%);
+  --gradient-sweet-sky: linear-gradient(to bottom, #E0F7FF 0%, #C1F0F6 100%);
+  
+  
+  --shadow-soft: 0 5px 15px rgba(0, 0, 0, 0.05);
+  --shadow-paper: 0 3px 10px rgba(0, 0, 0, 0.1);
+  --shadow-float: 0 8px 20px rgba(255, 140, 174, 0.2);
+  
+  
+  --border-dashed: 2px dashed #FFAAA5;
+  --border-scalloped: 8px solid #FF8AAE;
+  --border-polaroid: 12px solid white;
+}
