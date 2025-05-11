@@ -602,6 +602,8 @@
   align-items: flex-end;
   justify-content: center;
   text-align: right;
+  white-space: nowrap;
+  word-wrap: break-word;
 
   span {
     color: var(--color-primary);
@@ -614,6 +616,7 @@
   font-style: italic;
   font-weight: bold;
   color: var(--color-primary);
+  white-space: nowrap;
 }
 
 .revealContainer {
@@ -1081,8 +1084,6 @@
   background: var(--color-bg-paper);
 }
 
-
-
 .letterHeader h3 {
   font-size: 1.4rem;
   color: var(--color-text-ink);
@@ -1112,7 +1113,7 @@
   padding-left: 20px;
   margin-bottom: 20px;
 }
-.stampIcon{
+.stampIcon {
   color: var(--color-heart);
   position: absolute;
   left: -25px;
@@ -1257,9 +1258,8 @@
   }
   .revealText {
     width: 95vw;
-    align-items: flex-end;
-    justify-content: flex-end;
-   
+    align-items: center;
+    justify-content: center;
   }
 
   .revealContainer {
@@ -1320,9 +1320,9 @@
     max-height: none;
   }
 
- .envelope.open .envelopeLetter {
-  transform: translateY(-70px);
-}
+  .envelope.open .envelopeLetter {
+    transform: translateY(-70px);
+  }
 
   .complimentList {
     padding-left: 15px;
@@ -1352,7 +1352,6 @@
 
   .revealText {
     min-height: 100px;
-    font-size: 1.7rem;
   }
 
   .polaroidContent {
