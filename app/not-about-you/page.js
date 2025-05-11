@@ -236,7 +236,7 @@ export default function NotAboutYou() {
     availableCompliments,
     compliments.length,
     showCuteAlert,
-    showFinalButton,
+    showFinalButton
   ]);
 
   // Navigate to final receipt section
@@ -367,7 +367,7 @@ export default function NotAboutYou() {
 
             <div className={styles.welcomeInput}>
               <p className={styles.handwrittenText}>
-                Before we start: what's your name?
+                Before we start: what&apos;s your name?
                 <br />
                 <span
                   style={{
@@ -376,7 +376,7 @@ export default function NotAboutYou() {
                     paddingBottom: "10px",
                   }}
                 >
-                  (Don't worry, this isn't about you.)
+                  (Don&apos;t worry, this isn&apos;t about you.)
                 </span>
               </p>
 
@@ -439,7 +439,7 @@ export default function NotAboutYou() {
 
               {revealStep === 1 && (
                 <p className={styles.revealText}>
-                  Okay... maybe it's a&nbsp;<em>tiny bit</em>&nbsp; about you.
+                  Okay... maybe it&apos;s a&nbsp;<em>tiny bit</em>&nbsp; about you.
                 </p>
               )}
 
@@ -565,7 +565,7 @@ export default function NotAboutYou() {
 
               <div className={styles.letterContent}>
                 <p className={styles.letterIntro}>
-                  You know, {name}, this page really wasn't supposed to be about
+                  You know, {name}, this page really wasn&apos;t supposed to be about
                   you. But sometimes the universe has other plans, especially
                   when it meets someone as remarkable as you.
                 </p>
@@ -580,9 +580,9 @@ export default function NotAboutYou() {
                 </ul>
 
                 <p className={styles.letterOutro}>
-                  If you're ever having a tough day, {name}, please come back
-                  and read this again. Remember these words aren't just empty
-                  compliments – they're truths about who you are.
+                  If you&apos;re ever having a tough day, {name}, please come back
+                  and read this again. Remember these words aren&apos;t just empty
+                  compliments – they&apos;re truths about who you are.
                 </p>
               </div>
 
