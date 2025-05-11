@@ -668,12 +668,31 @@
   animation-delay: 1.6s;
 }
 
+<<<<<<< HEAD
 .revealText span {
+=======
+.revealText {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--color-text-ink);
+  line-height: 1.4;
+  margin: 20px 0;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  font-family: "Indie Flower", cursive;
+}
+
+.revealText .nameBef{
+>>>>>>> d00fd44e538b65fbd6d3656cc663c7216fc9059e
   color: var(--color-text-marker);
   position: relative;
 }
 
-.revealText span::after {
+.revealText .nameBef::after {
   content: "";
   position: absolute;
   left: 0;
