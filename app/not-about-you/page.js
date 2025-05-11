@@ -100,7 +100,6 @@ export default function NotAboutYou() {
   useEffect(() => {
     if (currentSection === "reveal" && revealStep === 0) {
       setTimeout(() => setRevealStep(1), 800);
-      return;
       setTimeout(() => {
         setRevealStep(2);
         confetti({
