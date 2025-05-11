@@ -444,10 +444,10 @@ export default function NotAboutYou() {
               )}
 
               {revealStep === 2 && (
-                <p className={styles.revealText}>
-                  Actually, yeah. This whole thing is for you,{" "}
-                  <span>{name}</span>.<span className={styles.heart}>❤</span>
-                </p>
+                <span className={styles.revealText}>
+                  Actually, yeah. This whole thing is for you,&nbsp;
+                  <span>{name}</span>.<p className={styles.heart}>❤</p>
+                </span>
               )}
 
               {showProceedToCompliments && revealStep === 2 && (
