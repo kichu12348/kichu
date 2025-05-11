@@ -83,7 +83,7 @@ export default function NotAboutYou() {
     const head = document.head;
     head
       .querySelector("meta[name=theme-color]")
-      .setAttribute("content", "#FF8AAE");
+      .setAttribute("content", "#FFFAF2");
     const title = head.querySelectorAll("title");
     title.forEach(async (t) => {
       await new Promise((resolve) => setTimeout(resolve, 200));
@@ -159,19 +159,7 @@ export default function NotAboutYou() {
   };
 
   const randomizeCompliments = (name) => {
-    const comps = [
-      `${name}, your presence is like a warm hug.`,
-      `${name}, you'd be the richest in kindness.`,
-      `${name}, your smile outshines the sun.`,
-      `${name}, you're a ray of sunshine.`,
-      `${name}, your laugh makes hearts dance.`,
-      `${name}, you make everyone feel special.`,
-      `${name}, you're proof good vibes spread.`,
-      `${name}, you turn moments extraordinary.`,
-      `${name}, you're a reminder of goodness.`,
-    ];
-    const randomIndex = Math.floor(Math.random() * comps.length);
-    return comps[randomIndex];
+    return `Defo not about you, ${name}, but you sound cool and all.`;
   }
 
 
