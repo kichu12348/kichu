@@ -317,21 +317,39 @@
 }
 
 .envelopeTop {
-  top: 0;
+  position: absolute;
+  top: -48%;
   left: 0;
   width: 100%;
   height: 0;
   border-left: 125px solid transparent;
   border-right: 125px solid transparent;
   border-bottom: 80px solid var(--color-bg-envelope);
-  transform-origin: top;
-  transform: rotateX(180deg);
-  transition: transform 0.6s ease-out;
-  z-index: 2;
+  transform-origin: bottom;
+  transform: rotateX(60deg) rotateZ(180deg);
+  transition: all 0.6s ease-out;
+  z-index: 5;
+}
+
+.envelopeBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-envelope);
+  border-radius: 5px;
+  z-index: 4;
+  transition: all 0.6s ease-out;
 }
 
 .envelope.open .envelopeTop {
-  transform: rotateX(0deg);
+  transform: rotateX(180deg) rotateZ(180deg);
+  z-index: 2;
+}
+
+.envelope.open .envelopeBottom {
+  height: 50%;
 }
 
 .envelopeLetter {
@@ -339,13 +357,14 @@
   width: 90%;
   height: 90%;
   background: var(--color-bg-paper);
+  padding: 5px;
   top: 5%;
   left: 5%;
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   transform: translateY(0);
   transition: transform 0.5s ease-out 0.4s;
-  z-index: 1;
+  z-index: 3;
 
   span {
     display: flex;
@@ -354,16 +373,24 @@
     flex-direction: column;
     overflow: hidden;
     word-wrap: break-word;
+  }
 
-    .LetterRandomContainer {
-      color: var(--color-text-ink);
-      word-wrap: break-word;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2rem;
-      font-family: "Comic Neue", cursive;
-      gap: 5px;
-    }
+  .lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 80%;
+  }
+
+  .line {
+    width: 80%;
+    border-radius: 10px;
+    transform: rotate(-2deg) skewX(-10deg);
+    color: var(--color-text-pencil);
+    font-family: "Indie Flower", cursive;
+    opacity: 0.6;
   }
 }
 
@@ -565,18 +592,26 @@
   font-size: 2rem;
   color: var(--color-text-moonbeam);
   font-weight: bold;
-  line-height: 1.3;
+  font-family: "Indie Flower", cursive;
   margin: 15px 0;
-  min-height: 130px;
+  min-height: 40px;
+  word-break: break-word;
+  white-space: normal;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
   span {
-    color: var(--color-accent-supernova-pink);
+    color: var(--color-primary);
   }
 }
 
-.revealText em {
+.inlineEm {
+  display: inline;
   font-style: italic;
-  color: var(--color-accent-starlight-gold);
+  font-weight: bold;
+  color: var(--color-primary);
 }
 
 .revealContainer {
@@ -633,21 +668,6 @@
   animation-delay: 1.6s;
 }
 
-.revealText {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: var(--color-text-ink);
-  line-height: 1.4;
-  margin: 20px 0;
-  min-height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  text-align: center;
-  font-family: "Indie Flower", cursive;
-}
-
 .revealText span {
   color: var(--color-text-marker);
   position: relative;
@@ -661,13 +681,6 @@
   width: 100%;
   height: 2px;
   background: var(--color-text-marker);
-}
-
-.revealText em {
-  font-style: italic;
-  color: var(--color-primary);
-  position: relative;
-  display: inline-block;
 }
 
 .heart {
@@ -1240,10 +1253,17 @@
     border-right: 110px solid transparent;
     border-bottom: 75px solid var(--color-bg-envelope);
   }
+  .revealText {
+    width: 95vw;
+  }
+
+  .revealContainer {
+    padding: 0;
+  }
 
   .denialHeader,
   .revealText {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 
   .polaroidGrid {
@@ -1294,6 +1314,10 @@
 
     max-height: none;
   }
+
+ .envelope.open .envelopeLetter {
+  transform: translateY(-70px);
+}
 
   .complimentList {
     padding-left: 15px;

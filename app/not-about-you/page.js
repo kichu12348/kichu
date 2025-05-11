@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import styles from "./not-about-you.module.css";
 import confetti from "canvas-confetti";
 import {
@@ -12,6 +12,7 @@ import {
   FaMagic,
   FaGift,
 } from "react-icons/fa";
+import { IoHeart } from "react-icons/io5";
 import html2canvas from "html2canvas";
 import "./colors.css";
 
@@ -42,6 +43,16 @@ const stampIcons = [
   { icon: <FaMagic />, text: "Magical Truth" },
 ];
 
+const debouncded = (func, delay) => {
+  let timeoutId;
+  return (...args)=>{
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  }
+}
+
 export default function NotAboutYou() {
   // State management
   const [name, setName] = useState("");
@@ -56,9 +67,9 @@ export default function NotAboutYou() {
   const [showCuteAlert, setShowCuteAlert] = useState(false);
   const [showFinalButton, setShowFinalButton] = useState(false);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
-  const hasGivenAllCompliments=useRef(false);
+  const [randomCompliment, setRandomCompliment] = useState("");
+  const hasGivenAllCompliments = useRef(false);
   const receiptRef = useRef(null);
-
 
   useEffect(() => {
     if (currentSection === "landing") {
@@ -68,28 +79,27 @@ export default function NotAboutYou() {
     }
   }, [currentSection]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const head = document.head;
-    head.querySelector("meta[name=theme-color]").setAttribute("content", "#FF8AAE");
-    const title=head.querySelectorAll("title");
-    title.forEach(async t=>{
-        await new Promise(resolve => setTimeout(resolve, 200));
-        t.innerHTML="Not About You";
+    head
+      .querySelector("meta[name=theme-color]")
+      .setAttribute("content", "#FF8AAE");
+    const title = head.querySelectorAll("title");
+    title.forEach(async (t) => {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      t.innerHTML = "Not About You";
     });
-   const fav=head.querySelectorAll("link[rel=icon]");
-    fav.forEach(l=>{
-        l.setAttribute("href", "/images/star.svg");
-        l.setAttribute("type", "image/svg+xml");
-        l.setAttribute("sizes", "any");
+    const fav = head.querySelectorAll("link[rel=icon]");
+    fav.forEach((l) => {
+      l.setAttribute("href", "/images/star.svg");
+      l.setAttribute("type", "image/svg+xml");
+      l.setAttribute("sizes", "any");
     });
-  },[]);
-
+  }, []);
 
   useEffect(() => {
     if (currentSection === "reveal" && revealStep === 0) {
-
       setTimeout(() => setRevealStep(1), 800);
-
       setTimeout(() => {
         setRevealStep(2);
         confetti({
@@ -147,11 +157,39 @@ export default function NotAboutYou() {
     }, 300);
   };
 
+  const randomizeCompliments = (name) => {
+    const comps = [
+      `${name}, your presence is like a warm hug.`,
+      `${name}, you'd be the richest in kindness.`,
+      `${name}, your smile outshines the sun.`,
+      `${name}, you're a ray of sunshine.`,
+      `${name}, your laugh makes hearts dance.`,
+      `${name}, you make everyone feel special.`,
+      `${name}, you're proof good vibes spread.`,
+      `${name}, you turn moments extraordinary.`,
+      `${name}, you're a reminder of goodness.`,
+    ];
+    const randomIndex = Math.floor(Math.random() * comps.length);
+    return comps[randomIndex];
+  }
+
+
+  const handleRandomCompliment = (name) => {
+    if (!name||name.trim() === ""){
+      setRandomCompliment("");
+      return;
+    }
+    const randomCompliment = randomizeCompliments(name);
+    setRandomCompliment(randomCompliment);
+  }
+
+  const handleRandomComplimentDebounced = useMemo(()=>debouncded(handleRandomCompliment, 300),[]);
+
   // Add a new compliment
   const handleAddCompliment = () => {
     if (availableCompliments.length === 0) {
-        if(hasGivenAllCompliments.current) return;
-        hasGivenAllCompliments.current=true;
+      if (hasGivenAllCompliments.current) return;
+      hasGivenAllCompliments.current = true;
       setCompliments((prev) => [
         ...prev,
         {
@@ -236,7 +274,7 @@ export default function NotAboutYou() {
     availableCompliments,
     compliments.length,
     showCuteAlert,
-    showFinalButton
+    showFinalButton,
   ]);
 
   // Navigate to final receipt section
@@ -354,15 +392,17 @@ export default function NotAboutYou() {
               </div>
               <div className={styles.envelopeLetter}>
                 <span>
-                  <span className={styles.heart}>❤</span>
-                  {/* <p className={styles.LetterRandomContainer}>
-                    {Array.from({ length: 10 }, (_, i) => (
-                
-                        <span key={i} className={styles.LetterRandom}/>
-                    ))}
-                    </p> */}
+                  <span className={styles.heart}>
+                    <IoHeart />
+                  </span>
                 </span>
+                <div className={styles.lines}>
+                  <div className={styles.line}>
+                    {randomCompliment}
+                  </div>
+                </div>
               </div>
+              <div className={styles.envelopeBottom}></div>
             </div>
 
             <div className={styles.welcomeInput}>
@@ -387,10 +427,17 @@ export default function NotAboutYou() {
                 <input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value)
+                    handleRandomComplimentDebounced(e.target.value);
+                  }}
                   placeholder="Type your name here..."
                   className={styles.nameInput}
                   aria-label="Your name"
+                  autoComplete="off"
+                  autoFocus
+                  required
+                  spellCheck="false"
                 />
                 <button type="submit" className={styles.cuteButton}>
                   Continue (again, definitely not about you)
@@ -420,7 +467,7 @@ export default function NotAboutYou() {
               onClick={handleContinueToReveal}
               title="Click to continue"
             >
-              ❤
+              <IoHeart />
             </div>
           </div>
         )}
@@ -439,14 +486,18 @@ export default function NotAboutYou() {
 
               {revealStep === 1 && (
                 <p className={styles.revealText}>
-                  Okay... maybe it&apos;s a&nbsp;<em>tiny bit</em>&nbsp; about you.
+                  Okie... maybe it's a&nbsp;
+                  <em className={styles.inlineEm}>tiny bit</em>&nbsp;about you.
                 </p>
               )}
 
               {revealStep === 2 && (
                 <span className={styles.revealText}>
                   Actually, yeah. This whole thing is for you,&nbsp;
-                  <span>{name}</span>.<p className={styles.heart}>❤</p>
+                  <span>{name}</span>.
+                  <p className={styles.heart}>
+                    <IoHeart />
+                  </p>
                 </span>
               )}
 
@@ -565,9 +616,9 @@ export default function NotAboutYou() {
 
               <div className={styles.letterContent}>
                 <p className={styles.letterIntro}>
-                  You know, {name}, this page really wasn&apos;t supposed to be about
-                  you. But sometimes the universe has other plans, especially
-                  when it meets someone as remarkable as you.
+                  You know, {name}, this page really wasn&apos;t supposed to be
+                  about you. But sometimes the universe has other plans,
+                  especially when it meets someone as remarkable as you.
                 </p>
 
                 <p className={styles.letterSubheader}>
@@ -580,16 +631,17 @@ export default function NotAboutYou() {
                 </ul>
 
                 <p className={styles.letterOutro}>
-                  If you&apos;re ever having a tough day, {name}, please come back
-                  and read this again. Remember these words aren&apos;t just empty
-                  compliments – they&apos;re truths about who you are.
+                  If you&apos;re ever having a tough day, {name}, please come
+                  back and read this again. Remember these words aren&apos;t
+                  just empty compliments – they&apos;re truths about who you
+                  are.
                 </p>
               </div>
 
               <div className={styles.letterFooter}>
                 <p>{getPersonalizedClosing()}</p>
                 <div className={styles.letterStamp}>
-                  Made with ❤️ for {name}
+                  Made with <IoHeart color="#FF8AAE" /> for {name}
                 </div>
               </div>
             </div>
