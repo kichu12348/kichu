@@ -1,6 +1,7 @@
 "use client";
 import styles from "./terminal.module.css";
 import { useEffect, useState, useRef } from "react";
+import { rollsArr } from "./rolls";
 
 const aboutMeText = [
   "I'm a full-stack developer currently pursuing Computer",
@@ -24,6 +25,28 @@ const initialMessage = [
   "",
 ];
 
+const randomQuotes = [
+  "If life gives you lemons, trade them for ice cream. After all, life's too short for sour moments.",
+  "When reality calls, sometimes it's okay to hang up. You don’t need to answer every time.",
+  "Follow your heart... but also check the fridge. You never know when you'll find your true calling.",
+  "If at first, you don’t succeed, remember: skydiving is definitely not a ‘try and try again’ situation.",
+  "I'm not lazy, I’m just conserving my energy for something important... like napping.",
+  "The world is a simulation, and my code just threw an exception. Sometimes, it's okay to glitch.",
+  "If life gives you lemons, check if the world’s running a citrus monopoly. It’s probably a plot.",
+  "Coffee first. Schemes later. You can't conquer the world without your morning brew.",
+  "I’m on a seafood diet—I see food, and I eat it. That’s my diet advice: stay hungry for both food and life.",
+  "404: Motivation not found. Sometimes, it’s okay to just not feel it. Maybe try again tomorrow.",
+  "I learned to code for her. Now I debug alone... but hey, at least I learned a lot about patience.",
+  "I’m on a rollercoaster of caffeine and bad decisions. But hey, at least it's never boring!",
+  "Don’t worry, I’m not procrastinating—I’m just an enthusiast of waiting for the perfect moment to start.",
+  "I put my heart into coding, but the compiler threw it away. Sometimes, life just doesn't compile the way you want.",
+  "I can’t adult today, but I can definitely debug. Priorities, right?",
+  "They told me to follow my dreams, so I wrote a script to do it for me. Efficiency, people.",
+  "I’m not arguing, I’m just explaining why I’m right... in code. It’s a developer thing.",
+  "I told my computer I needed space. It froze. Sometimes, we all need a little space to reboot.",
+  "It’s not procrastinating; it’s just prioritizing your nap time. Rest is part of the process.",
+];
+
 export default function Terminal() {
   const [outputLines, setOutputLines] = useState([...initialMessage]);
   const [inputValue, setInputValue] = useState("");
@@ -34,111 +57,45 @@ export default function Terminal() {
   const expressionIndex = useRef(-1);
   const allExpressions = useRef([]);
   const loc = useRef(null);
-  const videoRef = useRef(null);
+  const audioRef = useRef(null);
 
-  function asciiVideo(video, outputFn) {
-    const asciiChars = ". ";
-
-    const width = 60;
-    const height = 30;
-
-    const container = document.createElement("div");
-    container.style.fontFamily = "monospace";
-    container.style.lineHeight = "1";
-    container.style.whiteSpace = "pre";
-    container.style.fontSize = "10px";
-    container.style.letterSpacing = "0px";
-
-    container.style.position = "absolute";
-    container.style.left = "-9999px";
-    document.body.appendChild(container);
-
-    video.crossOrigin = "anonymous";
-    video.autoplay = true;
-
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-
+  function asciiVideo(audio, outputFn) {
     let isRendering = true;
-    let lastFrameTime = 0;
-    const frameDelay = 1000 / 15;
+    let frameIndex = 0;
+    const frameDelay = 1000 / 30;
+    audio.currentTime = 0;
+    audio.play();
 
-    const cleanup = (n) => {
+    const cleanup = () => {
       isRendering = false;
-      video.pause();
-      if (container && document.body.contains(container)) {
-        document.body.removeChild(container);
-      }
       outputFn("");
+      audio.pause();
+      audio.currentTime = 0;
     };
 
-    video.addEventListener("play", () => {
-      renderFrame(0);
-    });
-
-
-    video.play().catch(() => {
-      const clickHandler = () => {
-        video.play().catch((err) => {
-          cleanup(3);
-        });
-        document.removeEventListener("click", clickHandler);
-      };
-
-      document.addEventListener("click", clickHandler);
-    });
-
-    function renderFrame(timestamp) {
-      if (!isRendering) return;
-
-      if (timestamp - lastFrameTime < frameDelay) {
-        requestAnimationFrame(renderFrame);
+    function renderNextFrame() {
+      if (!isRendering || frameIndex >= rollsArr.length) {
+        cleanup();
         return;
       }
 
-      lastFrameTime = timestamp;
+      outputFn(rollsArr[frameIndex]);
+      frameIndex++;
 
-      if (video.paused || video.ended) {
-        cleanup(4);
-        return;
-      }
-
-      ctx.drawImage(video, 0, 0, width, height);
-      const imageData = ctx.getImageData(0, 0, width, height);
-      const data = imageData.data;
-
-      let asciiFrame = "";
-      for (let y = 0; y < height; y++) {
-        if (!isRendering) return;
-        for (let x = 0; x < width; x++) {
-          const idx = (y * width + x) * 4;
-          const r = data[idx];
-          const g = data[idx + 1];
-          const b = data[idx + 2];
-
-          const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
-          const charIndex = brightness < 0.5 ? 0 : 1;
-          asciiFrame += asciiChars[charIndex];
-        }
-        asciiFrame += "\n";
-      }
-
-      
       if (isRendering) {
-        outputFn(asciiFrame);
-        requestAnimationFrame(renderFrame);
+        setTimeout(renderNextFrame, frameDelay);
       }
     }
+
+    renderNextFrame();
+
     return cleanup;
   }
 
   useEffect(() => {
-    const video = document.createElement("video");
-    video.src = "/vids/rolls.mp4";
-    video.preload = "auto";
-    videoRef.current = video;
+    const audio = new Audio("/audio/rolls.mp3");
+    audio.preload = "auto";
+    audioRef.current = audio;
   }, []);
 
   useEffect(() => {
@@ -153,7 +110,6 @@ export default function Terminal() {
       }
     };
     fetchLocation();
-
   }, []);
 
   const setAllExpressions = (newValue) => {
@@ -192,6 +148,7 @@ export default function Terminal() {
           "  help              - Show this help message",
           `  echo "expression" - Echo the text back`,
           "  run notsus.exe    - Defo not a sus",
+          "  run quote.exe     - Motivation 🗿",
           "",
         ]);
         break;
@@ -302,40 +259,44 @@ export default function Terminal() {
         await typeLine("loadin heh 😼...", 50);
         await delay(500);
         setOutputLines((prev) => [...prev, ""]);
-        asciiVideo(
-          videoRef.current,
-          (asciiFrame) => {
-            if (!asciiFrame) {
-              setOutputLines((prev) => {
-                const frameIndex = prev.findIndex((line) =>
-                  line.startsWith("ASCII_FRAME_MARKER")
-                );
-
-                if (frameIndex >= 0) {
-                  //const newLines = [...prev.slice(0, frameIndex)];
-                  return [...initialMessage, ""];
-                } else {
-                  return [...initialMessage, ""];
-                }
-              });
-              return;
-            }
-
+        asciiVideo(audioRef.current, (asciiFrame) => {
+          if (!asciiFrame) {
             setOutputLines((prev) => {
               const frameIndex = prev.findIndex((line) =>
                 line.startsWith("ASCII_FRAME_MARKER")
               );
 
               if (frameIndex >= 0) {
-                const newLines = [...prev];
-                newLines[frameIndex] = "ASCII_FRAME_MARKER" + asciiFrame;
-                return newLines;
+                //const newLines = [...prev.slice(0, frameIndex)];
+                return [...initialMessage, ""];
               } else {
-                return [...prev, "ASCII_FRAME_MARKER" + asciiFrame];
+                return [...initialMessage, ""];
               }
             });
+            return;
           }
-        );
+
+          setOutputLines((prev) => {
+            const frameIndex = prev.findIndex((line) =>
+              line.startsWith("ASCII_FRAME_MARKER")
+            );
+
+            if (frameIndex >= 0) {
+              const newLines = [...prev];
+              newLines[frameIndex] = "ASCII_FRAME_MARKER" + asciiFrame;
+
+              return newLines;
+            } else {
+              return [...prev, "ASCII_FRAME_MARKER" + asciiFrame];
+            }
+          });
+        });
+        break;
+
+      case "run quote.exe":
+        const randomQuote =
+          randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
+        await typeLine(randomQuote, 50);
         break;
       default:
         if (command?.startsWith("echo")) {
@@ -441,7 +402,7 @@ export default function Terminal() {
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: line?.replace(/ /g, "&nbsp;"),
+                    __html:"&nbsp;"+line?.replace(/ /g, "&nbsp;"),
                   }}
                 />
               )}

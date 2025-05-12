@@ -26,7 +26,7 @@
   max-height: 600px;
   background-color: #000000;
   border: 2px solid #333; 
-  border-radius: 15px; 
+  border-radius: 5px; 
   padding: 20px;
   box-shadow: 
     0 0 20px rgba(255, 223, 0, 0.2), 
@@ -38,18 +38,15 @@
 }
 
 .terminalScreen::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 .terminalScreen::-webkit-scrollbar-track {
-  background: #000000;
-  border-radius: 10px;
+  background: #00000000;
 }
 
 .terminalScreen::-webkit-scrollbar-thumb {
   background-color: #ffd700;
-  border-radius: 10px;
-  border: 2px solid #1a1a1a;
   box-shadow: 0 0 5px #ffd700;
 }
 
@@ -82,11 +79,10 @@
   background: transparent;
   border: none;
   color: #ffd700;
-  text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+  text-shadow:0 0 5px gold, 0 0 10px #ffdf00b3;
   font-family: inherit; 
   font-size: inherit;
   outline: none;
-  padding: 0;
   caret-color: transparent; 
 }
 
