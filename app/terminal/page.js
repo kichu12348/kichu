@@ -298,6 +298,9 @@ export default function Terminal() {
           randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
         await typeLine(randomQuote, 50);
         break;
+      case "hello_world()":
+        await typeLine("Print", 50);
+        break;
       default:
         if (command?.startsWith("echo")) {
           const echoText = command.slice(5).trim();
