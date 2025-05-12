@@ -93,7 +93,7 @@ const ProjectsSection = forwardRef((_, ref) => {
         viewport={{ once: true }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className={pageStyles.sectionTitle}>Featured Projects</h2>
+        <h2 className={`${pageStyles.sectionTitle} ${projectStyles.marginBottom}`} >Featured Projects</h2>
         <div className={projectStyles.projectsGrid}>
           <SwipeList
             data={projects}
