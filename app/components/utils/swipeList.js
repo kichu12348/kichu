@@ -353,8 +353,6 @@ export default function SwipeList({
               className={`${styles.dot} ${activeIndex === index ? styles.active : ""}`}
               style={{
                 backgroundColor: activeIndex === index ? " rgb(var(--q-primary))" : " rgb(var(--q-primary))",
-                width: dotSize || "10px",
-                height: dotSize || "10px",
               }}
               onClick={() => goToSlide(index)}
               type="button"
