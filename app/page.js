@@ -173,7 +173,7 @@ export default function Home() {
       <ContactSection ref={contactSectionRef} />
 
       <SocialLinks 
-        hidden={activeSection === "contact" || activeSection === "projects"} 
+        hidden={activeSection === "contact" || activeSection === "projects" ||activeSection==="education"} 
         cyberpunkMode={cyberpunkMode} 
       />
 
