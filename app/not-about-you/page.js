@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
 import styles from "./not-about-you.module.css";
 import confetti from "canvas-confetti";
 import {
@@ -79,22 +79,22 @@ export default function NotAboutYou() {
     }
   }, [currentSection]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const head = document.head;
     head
       .querySelector("meta[name=theme-color]")
       .setAttribute("content", "#FFFAF2");
-    const title = head.querySelectorAll("title");
-    title.forEach(async (t) => {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      t.innerHTML = "Not About You";
-    });
-    const fav = head.querySelectorAll("link[rel=icon]");
-    fav.forEach((l) => {
-      l.setAttribute("href", "/images/star.svg");
-      l.setAttribute("type", "image/svg+xml");
-      l.setAttribute("sizes", "any");
-    });
+    // const title = head.querySelectorAll("title");
+    // title.forEach(async (t) => {
+    //   await new Promise((resolve) => setTimeout(resolve, 200));
+    //   t.innerHTML = "Not About You";
+    // });
+    // const fav = head.querySelectorAll("link[rel=icon]");
+    // fav.forEach((l) => {
+    //   l.setAttribute("href", "/images/star.svg");
+    //   l.setAttribute("type", "image/svg+xml");
+    //   l.setAttribute("sizes", "any");
+    // });
   }, []);
 
   useEffect(() => {
