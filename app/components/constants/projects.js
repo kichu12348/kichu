@@ -74,23 +74,23 @@ export const projects = [
     ],
   },
   {
-  title: "Neru – A Simple Neural Network Implementation",
-  description:
-  "An educational TypeScript library for implementing feed-forward neural networks with backpropagation learning. Designed for simplicity and clarity, it provides a hands-on way to understand neural networks.",
-  tech: ["TypeScript"],
-  features: [
-              "Feed-forward propagation",
-              "Simplified backpropagation learning",
-              "Configurable network architecture",
-              "Sigmoid activation function",
-  ],
-  links: [
-           {
-             url: "https://github.com/kichu12348/neru",
-             icon: Github,
-             text: "GitHub",
-            },
-         ],
+    title: "Neru – A Simple Neural Network Implementation",
+    description:
+      "An educational TypeScript library for implementing feed-forward neural networks with backpropagation learning. Designed for simplicity and clarity, it provides a hands-on way to understand neural networks.",
+    tech: ["TypeScript"],
+    features: [
+      "Feed-forward propagation",
+      "Simplified backpropagation learning",
+      "Configurable network architecture",
+      "Sigmoid activation function",
+    ],
+    links: [
+      {
+        url: "https://github.com/kichu12348/neru",
+        icon: Github,
+        text: "GitHub",
+      },
+    ],
   },
   {
     title: "Pineabble 🎯",
