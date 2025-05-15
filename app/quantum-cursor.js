@@ -36,7 +36,7 @@ export default function QuantumCursor() {
         setActive(false);
       };
       const interactiveElements = document.querySelectorAll(
-        'a, button, [role="button"], input, select, textarea, .techCard, .projectCard, .timelineContent, .contactLink'
+        'a, button, [role="button"], input, select, textarea, .techCard, .projectCard, .timelineContent, .contactLink .quant-cursor'
       );
       
       interactiveElements.forEach(el => {

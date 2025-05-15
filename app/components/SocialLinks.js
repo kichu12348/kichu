@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../page.module.css";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
 export default function SocialLinks({ hidden, cyberpunkMode }) {
   return (
@@ -30,6 +30,17 @@ export default function SocialLinks({ hidden, cyberpunkMode }) {
       </a>
       <a href="mailto:rmahadevan574@gmail.com">
         <Mail 
+          className={styles.socialIcon}
+          size={24}
+          color={cyberpunkMode ? "#ffffff" : "#000000"}
+        />
+      </a>
+      <a 
+        href="/resume/Resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FileText 
           className={styles.socialIcon}
           size={24}
           color={cyberpunkMode ? "#ffffff" : "#000000"}

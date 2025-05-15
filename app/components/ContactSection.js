@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import styles from "../page.module.css";
 import { forwardRef } from "react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { FileText, Github, Linkedin, Mail } from "lucide-react";
 
 const ContactSection = forwardRef((props, ref) => {
   return (
@@ -42,6 +42,14 @@ const ContactSection = forwardRef((props, ref) => {
             className={styles.contactLink}
           >
             <Linkedin /> linkedin.com/in/MahadevanReji
+          </a>
+          <a
+            href="/resume/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.contactLink} quant-cursor`}
+          >
+            <FileText /> View Resume
           </a>
         </div>
       </motion.div>

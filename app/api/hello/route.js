@@ -1,6 +1,5 @@
 
 export async function GET(req) {
-    console.log(req.headers.get('x-forwarded-for'));
     const res = new Response(JSON.stringify({ message: "Hello, World!" }), {
         status: 200,
         headers: {
