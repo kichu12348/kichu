@@ -1,7 +1,6 @@
-import { Github, Globe, Info, Linkedin } from "lucide-react";
-
-// fallback projects in case of API failure
-export const initialProjects = [
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
+const initialProjects = [
   {
     title: "Vibelink – Where Vibes Connect",
     description:
@@ -16,12 +15,12 @@ export const initialProjects = [
     links: [
       {
         url: "https://github.com/kichu12348/vibelink",
-        icon: Github,
+        icon: "Github",
         text: "GitHub",
       },
       {
         url: "https://vibelink.kichu.space",
-        icon: Info,
+        icon: "Info",
         text: "Learn More",
       },
     ],
@@ -40,12 +39,12 @@ export const initialProjects = [
     links: [
       {
         url: "https://github.com/kichu12348/snapbook",
-        icon: Github,
+        icon: "Github",
         text: "GitHub",
       },
       {
         url: "https://snapbook.kichu.space",
-        icon: Info,
+        icon: "Info",
         text: "Learn More",
       },
     ],
@@ -64,12 +63,12 @@ export const initialProjects = [
     links: [
       {
         url: "https://github.com/kichu12348/dune_base",
-        icon: Github,
+        icon: "Github",
         text: "GitHub",
       },
       {
         url: "https://utsav-2k25.vercel.app",
-        icon: Globe,
+        icon: "Globe",
         text: "Live Demo",
       },
     ],
@@ -88,7 +87,7 @@ export const initialProjects = [
     links: [
       {
         url: "https://github.com/kichu12348/neru",
-        icon: Github,
+        icon: "Github",
         text: "GitHub",
       },
     ],
@@ -107,12 +106,12 @@ export const initialProjects = [
     links: [
       {
         url: "https://github.com/username/bananas",
-        icon: Github,
+        icon: "Github",
         text: "GitHub",
       },
       {
         url: "https://baananaa.vercel.app",
-        icon: Globe,
+        icon: "Globe",
         text: "Live Demo",
       },
     ],
@@ -123,12 +122,12 @@ export const initialProjects = [
           {
             type: "LinkedIn",
             uri: "https://www.linkedin.com/in/neil-oommen-renni-aa1694291",
-            icon: Linkedin,
+            icon: "Linkedin",
           },
           {
             type: "GitHub",
             uri: "https://github.com/neilor-21",
-            icon: Github,
+            icon: "Github",
           },
         ],
       },
@@ -138,12 +137,12 @@ export const initialProjects = [
           {
             type: "LinkedIn",
             uri: "https://www.linkedin.com/in/malavika-g-k-405089351",
-            icon: Linkedin,
+            icon: "Linkedin",
           },
           {
             type: "GitHub",
             uri: "https://github.com/MalavikaGK",
-            icon: Github,
+            icon: "Github",
           },
         ],
       },
@@ -151,49 +150,98 @@ export const initialProjects = [
   },
 ];
 
-export async function getProjects() {
+async function migrateProjects() {
+  console.log('Starting database migration...');
+  
+  // Open the database
+  const db = await open({
+    filename: './projects.db',
+    driver: sqlite3.Database
+  });
+  
+  console.log('Connected to database');
+  let stmt = null;
+  
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`, { 
-      cache: 'no-store' 
-    });
+    // Create the projects table if it doesn't exist
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL,
+        tech TEXT NOT NULL,
+        features TEXT NOT NULL,
+        links TEXT NOT NULL,
+        collaborators TEXT
+      )
+    `);
     
-    if (!res.ok) {
-      console.error('Failed to fetch projects from API');
-      return initialProjects; 
+    console.log('Created projects table');
+    
+    // Check if data already exists to avoid duplicates
+    const count = await db.get('SELECT COUNT(*) as count FROM projects');
+    
+    if (count.count > 0) {
+      console.log(`Database already contains ${count.count} projects. Skipping seeding to avoid duplicates.`);
+      console.log('If you want to reseed, please delete the existing data first.');
+      return;
     }
     
-    const data = await res.json();
-
-    return data.map(project => ({
-      ...project,
-      links: project.links.map(link => ({
-        ...link,
-        icon: getIconFromName(link.icon)
-      })),
-      collaborators: project.collaborators ? project.collaborators.map(collab => ({
-        ...collab,
-        uri: collab.uri.map(u => ({
-          ...u,
-          icon: getIconFromName(u.icon)
-        }))
-      })) : undefined
-    }));
+    // Begin a transaction for better performance
+    await db.exec('BEGIN TRANSACTION');
+    
+    // Insert each project from initialProjects
+    stmt = await db.prepare(`
+      INSERT INTO projects (title, description, tech, features, links, collaborators)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `);
+    
+    for (const project of initialProjects) {
+      await stmt.run(
+        project.title,
+        project.description,
+        JSON.stringify(project.tech),
+        JSON.stringify(project.features),
+        JSON.stringify(project.links),
+        project.collaborators ? JSON.stringify(project.collaborators) : null
+      );
+      
+      console.log(`Migrated project: ${project.title}`);
+    }
+    
+    // Finalize the prepared statement
+    await stmt.finalize();
+    stmt = null;
+    
+    // Commit the transaction
+    await db.exec('COMMIT');
+    console.log(`Successfully migrated ${initialProjects.length} projects to the database`);
+    
   } catch (error) {
-    console.error('Error fetching projects:', error);
-    return initialProjects; 
+    // Rollback in case of error
+    await db.exec('ROLLBACK');
+    console.error('Error migrating data:', error);
+  } finally {
+    // Ensure statement is finalized
+    if (stmt) {
+      try {
+        await stmt.finalize();
+      } catch (err) {
+        console.error('Error finalizing statement:', err);
+      }
+    }
+    
+    // Close the database connection with a timeout to ensure everything is processed
+    setTimeout(async () => {
+      try {
+        await db.close();
+        console.log('Database connection closed');
+      } catch (err) {
+        console.error('Error closing database:', err);
+      }
+    }, 500);
   }
 }
 
-function getIconFromName(iconName) {
-  if (typeof iconName !== 'string') return iconName;
-  
-  switch(iconName) {
-    case 'Github': return Github;
-    case 'Globe': return Globe;
-    case 'Info': return Info;
-    case 'Linkedin': return Linkedin;
-    default: return Globe;
-  }
-}
-
-export const projects = initialProjects;
+// Run the migration function
+migrateProjects().catch(console.error);

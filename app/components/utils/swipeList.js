@@ -298,6 +298,16 @@ export default function SwipeList({
     }
   }, [pauseOnHover, autoplay, stage, slidesCount, goToNext, autoplayInterval]);
 
+  const howCloseToActiveDot=useCallback((index)=>{
+    if(index===activeIndex) return 1;
+    const newIdx = index+1;
+    const newActiveIdx=activeIndex+1
+    const x= newIdx%newActiveIdx;
+    const offset=0.05;
+    const norm = 1/(1+Math.exp(-x))-offset; 
+    return norm.toFixed(2)
+  }, [activeIndex]);
+
   return (
     <div 
       className={styles.container}
@@ -353,6 +363,7 @@ export default function SwipeList({
               className={`${styles.dot} ${activeIndex === index ? styles.active : ""}`}
               style={{
                 backgroundColor: activeIndex === index ? " rgb(var(--q-primary))" : " rgb(var(--q-primary))",
+                transform:[`scale(${howCloseToActiveDot(index)})`]
               }}
               onClick={() => goToSlide(index)}
               type="button"

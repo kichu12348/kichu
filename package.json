@@ -6,7 +6,9 @@
     "dev": "next dev -p 8080 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed-db": "node scripts/seed-database.js",
+    "pre-exit": "node scripts/close-db.js"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.6",
@@ -22,7 +24,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "swiper": "^11.2.6",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "three": "^0.175.0"
   },
   "devDependencies": {
