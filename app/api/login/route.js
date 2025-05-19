@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
@@ -7,32 +7,31 @@ export async function POST(request) {
 
     if (password !== envPassword) {
       return NextResponse.json(
-        { message: 'Invalid password' }, 
+        { message: "Invalid password", success: false },
         { status: 401 }
       );
     }
 
-    // Create the response
     const response = NextResponse.json(
-      { message: 'Login successful' },
+      { message: "Login successful", success: true },
       { status: 200 }
     );
 
     response.cookies.set({
-      name: 'admin-auth',
-      value: 'true',
-      path: '/',
-      maxAge: 60 * 60 * 24*7, // 1 week
+      name: "admin-auth",
+      value: "true",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 1 week
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
     });
 
     return response;
   } catch (error) {
-    console.error('Login error:', error);
+    console.error("Login error:", error);
     return NextResponse.json(
-      { message: 'Internal server error' }, 
+      { message: "Internal server error" },
       { status: 500 }
     );
   }
