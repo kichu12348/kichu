@@ -1,10 +1,20 @@
-import { getDb } from '@/lib/db';
+import { getDb, seedProjects } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
 // Get all projects
 export async function GET() {
   try {
     const db = await getDb();
+    
+    // Check if we have any projects
+    const count = await db.get('SELECT COUNT(*) as count FROM projects');
+    
+    // If empty, seed the database with initial projects
+    if (count.count === 0) {
+      await seedProjects();
+    }
+    
+    // Get all projects from the database
     const projects = await db.all('SELECT * FROM projects');
     
     // Parse JSON strings back into objects
@@ -43,6 +53,7 @@ export async function POST(request) {
     const result = await db.run(
       `INSERT INTO projects (title, description, tech, features, links, collaborators)
        VALUES (?, ?, ?, ?, ?, ?)`,
+
       [
         title,
         description,
