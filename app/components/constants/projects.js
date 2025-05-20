@@ -166,8 +166,6 @@ export async function getProjects() {
     
     const data = await res.json();
 
-    console.log('Fetched projects:', data);
-
     return data.map(project => ({
       ...project,
       links: project.links.map(link => ({
