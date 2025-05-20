@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+const endpoint = process.env.NEXT_PUBLIC_BASE_URL;
+
+
 export async function POST(request) {
   try {
     const { password } = await request.json();
@@ -17,9 +20,18 @@ export async function POST(request) {
       { status: 200 }
     );
 
+    const res = fetch(`${endpoint}/api/user-token`);
+    const data = await res.json();
+    if (res.status !== 200 || !data.token|| !res.ok) {
+      return NextResponse.json(
+        { message: "Failed to fetch user token", success: false },
+        { status: 500 }
+      );
+    }
+
     response.cookies.set({
       name: "admin-auth",
-      value: "true",
+      value: data.token,
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 1 week
       httpOnly: true,
