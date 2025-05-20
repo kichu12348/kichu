@@ -20,7 +20,7 @@ export async function POST(request) {
       { status: 200 }
     );
 
-    const res = fetch(`${endpoint}/api/user-token`);
+    const res =await fetch(`${endpoint}/api/user-token`);
     const data = await res.json();
     if (res.status !== 200 || !data.token|| !res.ok) {
       return NextResponse.json(

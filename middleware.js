@@ -10,10 +10,14 @@ export async function middleware(request) {
     loginUrl.pathname = "/login";
     return NextResponse.redirect(loginUrl);
   }
-
   try {
+    if (!adminAuth.value) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = "/login";
+      return NextResponse.redirect(loginUrl);
+    }
     const resposne = await fetch(
-      `${endpoint}/api/auth/is-valid/${adminAuth.trim()}`
+      `${endpoint}/api/auth/is-valid/${adminAuth.value.trim()}`
     );
 
     const data = await resposne.json();
