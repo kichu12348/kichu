@@ -154,15 +154,19 @@ export const initialProjects = [
 export async function getProjects() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`, { 
-      cache: 'no-store' 
+      cache: 'no-store', // Disable caching to always fetch fresh data
     });
-    
+
+
+
     if (!res.ok) {
       console.error('Failed to fetch projects from API');
       return initialProjects; 
     }
     
     const data = await res.json();
+
+    console.log('Fetched projects:', data);
 
     return data.map(project => ({
       ...project,
