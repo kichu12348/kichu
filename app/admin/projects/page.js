@@ -12,7 +12,7 @@ import {
   User,
 } from "lucide-react";
 
-const endpoint =process.env.NEXT_PUBLIC_BASE_URL;
+const endpoint = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function ProjectsAdmin() {
   const [projects, setProjects] = useState([]);
@@ -42,7 +42,7 @@ export default function ProjectsAdmin() {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const response = await fetch(endpoint+"/api/projects");
+      const response = await fetch(endpoint + "/api/projects");
       if (!response.ok) throw new Error("Failed to fetch projects");
       const data = await response.json();
       setProjects(data);
@@ -180,13 +180,15 @@ export default function ProjectsAdmin() {
       if (isEditing) {
         response = await fetch(`${endpoint}/api/projects/${editId}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json"},
+          credentials: "include",
           body: JSON.stringify(formData),
         });
       } else {
-        response = await fetch(endpoint+"/api/projects", {
+        response = await fetch(endpoint + "/api/projects", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(formData),
         });
       }
