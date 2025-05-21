@@ -180,14 +180,18 @@ export default function ProjectsAdmin() {
       if (isEditing) {
         response = await fetch(`${endpoint}/api/projects/${editId}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+          },
           credentials: "include",
           body: JSON.stringify(formData),
         });
       } else {
         response = await fetch(endpoint + "/api/projects", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           credentials: "include",
           body: JSON.stringify(formData),
         });
