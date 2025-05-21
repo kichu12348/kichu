@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
 
@@ -9,55 +9,63 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const createRandomCubes = () => {
-    const randomValues = Math.floor(Math.random() * 20 + 5); // Random number between 5 and 25
-    const randomColors = [
-      "#FF5733",
-      "#33FF57",
-      "#3357FF",
-      "#FF33A1",
-      "#A133FF",
-    ];
-    const container = document.getElementById("login-conainer");
-    const cubes = [];
-    for (let i = 0; i < randomValues; i++) {
-      const cube = document.createElement("div");
-      cube.className = styles.cube;
-      const size = Math.random() * 50 + 10; // Random size between 10px and 60px
-      cube.style.width = `${size}px`;
-      cube.style.backgroundColor =
-        randomColors[Math.floor(Math.random() * randomColors.length)];
-      cube.style.height = `${size}px`;
-      cube.style.top = `${(Math.random() * 100) % 90}%`;
-      cube.style.left = `${(Math.random() * 100) % 90}%`;
-      //cube.style.transform = `translate(${Math.random() * 100}vw, ${Math.random() * 100}vh)`;
-      container.appendChild(cube);
-      cubes.push(cube);
-    }
-    return () => {
-      cubes.forEach((cube) => {
-        container.removeChild(cube);
-      });
-    };
-  };
-
+  const particlesContainerRef = useRef(null);
+  
   useEffect(() => {
-    const handleResize = () => {
-      const container = document.getElementById("login-conainer");
-      const cubes = container.getElementsByClassName(styles.cube);
-      for (let i = 0; i < cubes.length; i++) {
-        cubes[i].style.transform = `translate(${Math.random() * 100}vw, ${
-          Math.random() * 100
-        }vh)`;
+    const createParticles = () => {
+      const container = particlesContainerRef.current;
+      if (!container) return () => {};
+      
+      const particleCount = 40; // Reduced slightly for darker theme
+      const particles = [];
+      
+      // Clear any existing particles
+      container.innerHTML = '';
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("div");
+        particle.className = styles.particle;
+        
+        // Random properties
+        const size = Math.random() * 6 + 1; // Smaller particles
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 15 + 10; // Longer duration for slower movement
+        
+        // Apply styles
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        container.appendChild(particle);
+        particles.push(particle);
       }
+      
+      return () => {
+        particles.forEach(p => {
+          if (p.parentNode === container) {
+            container.removeChild(p);
+          }
+        });
+      };
     };
-
+    
+    const cleanupParticles = createParticles();
+    
+    const handleResize = () => {
+      cleanupParticles();
+      createParticles();
+    };
+    
     window.addEventListener("resize", handleResize);
-    const cleanupCubes = createRandomCubes();
+    
     return () => {
       window.removeEventListener("resize", handleResize);
-      cleanupCubes();
+      cleanupParticles();
     };
   }, []);
 
@@ -67,7 +75,6 @@ function Login() {
     setError("");
 
     try {
-      // Set authentication cookie
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -77,11 +84,9 @@ function Login() {
       });
       const data = await response.json();
       if (response.ok && data.success) {
-        // Redirect to admin page on successful login
         router.push("/admin/projects");
         router.refresh();
       } else {
-        
         setError(data.message || "Login failed");
       }
     } catch (err) {
@@ -93,31 +98,47 @@ function Login() {
   };
 
   return (
-    <div className={styles.container} id="login-conainer">
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <h1 className={styles.title}>Admin Login</h1>
+    <div className={styles.container}>
+      <div className={styles.particlesContainer} ref={particlesContainerRef}></div>
+      <div className={styles.formContainer}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.formHeader}>
+            <h1 className={styles.title}>Admin Login</h1>
+            <div className={styles.underline}></div>
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="password" className={styles.label}>
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-            placeholder="Enter password"
-            required
-          />
-        </div>
+          <div className={styles.inputGroup}>
+            <div className={styles.inputWrapper}>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={styles.input}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="password" className={styles.floatingLabel}>
+                Password
+              </label>
+            </div>
+          </div>
 
-        {error && <p className={styles.error}>{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
 
-        <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          <button 
+            type="submit" 
+            className={styles.button} 
+            disabled={loading}
+          >
+            {loading ? (
+              <span className={styles.loadingSpinner}></span>
+            ) : (
+              "Login"
+            )}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

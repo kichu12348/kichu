@@ -32,10 +32,10 @@ export async function POST(request) {
     response.cookies.set({
       name: "admin-auth",
       value: data.token,
-      path: "/",
+      path: "/", //
       maxAge: 60 * 60 * 24 * 7, // 1 week
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      httpOnly: true, //
+      secure: true, // only send cookie over HTTPS
       sameSite: "none", // cross-site cookies
     });
 
