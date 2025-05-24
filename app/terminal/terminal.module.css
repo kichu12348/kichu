@@ -59,6 +59,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow: hidden;
     padding:0 15px;
     gap: 5px;
     flex-direction: row;
