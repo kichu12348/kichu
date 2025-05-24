@@ -1,40 +1,70 @@
 @font-face {
-    font-family: 'Perfect DOS VGA 437 WIN';
-    src: url('/fonts/perfect-dos-win.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Perfect DOS VGA 437 WIN";
+  src: url("/fonts/perfect-dos-win.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .terminalContainer {
-    cursor:default;
+  cursor: default;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100svh;
-  background-color: #0a0a0a; 
+  background-color: #0a0a0a;
   padding: 20px;
   box-sizing: border-box;
-  font-family: 'Perfect DOS VGA 437 WIN', 'Courier New', monospace; 
-  overflow: hidden; 
+  font-family: "Perfect DOS VGA 437 WIN", "Courier New", monospace;
+  overflow: hidden;
   position: relative;
 }
 
 .terminalScreen {
   width: 100%;
-  max-width: 900px; 
-  height: 80vh; 
+  max-width: 900px;
+  height: 80vh;
   max-height: 600px;
   background-color: #000000;
-  border: 2px solid #333; 
-  border-radius: 5px; 
+  border: 2px solid #333;
+  border-radius: 5px;
   padding: 20px;
-  box-shadow: 
-    0 0 20px rgba(255, 223, 0, 0.2), 
-    inset 0 0 15px rgba(0, 0, 0, 0.7); 
-  overflow-y: auto; 
-  position: relative; 
-  color: #ffd700; 
+  box-shadow: 0 0 20px rgba(255, 223, 0, 0.2), inset 0 0 15px rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+  position: relative;
+  color: #ffd700;
   text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+}
+
+.terminalLoad {
+  width: 100%;
+  max-width: 900px;
+  height: 80vh;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  color: #ffd700;
+  font-size: 1.5rem;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+
+  img {
+    border-radius: 5%;
+  }
+
+  .progressBar {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding:0 15px;
+    gap: 5px;
+    flex-direction: row;
+    height: 20px;
+    position: relative;
+  }
 }
 
 .terminalScreen::-webkit-scrollbar {
@@ -51,18 +81,18 @@
 }
 
 .terminalOutput {
-  white-space: pre-wrap; 
-  word-break: break-all; 
-  font-size: 1rem; 
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 1rem;
   line-height: 1.5;
   flex-grow: 1;
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .line {
-  display: flex; 
-  min-height: 1.5em; 
-  min-width: min-content; 
+  display: flex;
+  min-height: 1.5em;
+  min-width: min-content;
 }
 
 .prompt {
@@ -79,28 +109,32 @@
   background: transparent;
   border: none;
   color: #ffd700;
-  text-shadow:0 0 5px gold, 0 0 10px #ffdf00b3;
-  font-family: inherit; 
+  text-shadow: 0 0 5px gold, 0 0 10px #ffdf00b3;
+  font-family: inherit;
   font-size: inherit;
   outline: none;
-  caret-color: transparent; 
+  caret-color: transparent;
 }
 
 .cursor {
   display: inline-block;
-  width: 0.6em; 
+  width: 0.6em;
   height: 1em;
   background-color: #ffd700;
   animation: blink 1s step-end infinite;
   box-shadow: 0 0 5px #ffd700;
-  margin-left: 1px; 
+  margin-left: 1px;
   vertical-align: text-bottom;
 }
 
-
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .scanlineEffect {
@@ -118,13 +152,17 @@
   background-size: 100% 4px;
   animation: scan 15s linear infinite;
   opacity: 0.4;
-  z-index: 1; 
-  border-radius: 15px; 
+  z-index: 1;
+  border-radius: 15px;
 }
 
 @keyframes scan {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100px; } 
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100px;
+  }
 }
 
 .vignetteEffect {
@@ -136,7 +174,7 @@
   pointer-events: none;
   border-radius: 15px;
   box-shadow: inset 0 0 80px 20px rgba(0, 0, 0, 0.5);
-  z-index: 0; 
+  z-index: 0;
 }
 
 .asciiArt {
@@ -173,12 +211,13 @@
     font-size: 0.9rem;
     border-radius: 10px;
   }
-  .scanlineEffect, .vignetteEffect {
+  .scanlineEffect,
+  .vignetteEffect {
     border-radius: 10px;
   }
-  
+
   .terminalOutput {
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
   }
 }
 
@@ -192,9 +231,8 @@
     font-size: 0.8rem;
     border-radius: 8px;
   }
-  .scanlineEffect, .vignetteEffect {
+  .scanlineEffect,
+  .vignetteEffect {
     border-radius: 8px;
   }
-
-  
 }

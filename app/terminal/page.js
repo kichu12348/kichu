@@ -1,7 +1,8 @@
 "use client";
 import styles from "./terminal.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 import { rollsArr } from "./rolls";
+import Image from "next/image";
 
 const aboutMeText = [
   "I'm a full-stack developer currently pursuing Computer",
@@ -49,8 +50,10 @@ const randomQuotes = [
 
 export default function Terminal() {
   const [outputLines, setOutputLines] = useState([...initialMessage]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("help");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState("");
 
   const terminalEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -338,6 +341,8 @@ export default function Terminal() {
   };
 
   const handleInputChange = (e) => {
+    if (isProcessing) return;
+    e.preventDefault();
     setInputValue(e.target.value);
   };
 
@@ -387,6 +392,42 @@ export default function Terminal() {
     }
   }, [isProcessing]);
 
+  useEffect(() => {
+    const noOfLines = 20;
+    const progress = async () => {
+      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+      for (let i = 0; i < noOfLines; i++) {
+        await delay(300);
+        setProgress((prev) => prev + "█");
+      }
+      await delay(500);
+    };
+    progress().then(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className={styles.terminalContainer}>
+        <div className={styles.terminalLoad}>
+          <Image
+            src="/images/typingcar.gif"
+            alt="Loading..."
+            width={100}
+            height={100}
+            priority
+            className={styles.loadingImage}
+          />
+          <div>Loading...</div>
+          <div className={styles.progressBar}>
+            {progress.split("").map((char, index) => (
+              <span key={index}>{char}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={styles.terminalContainer}
@@ -405,7 +446,7 @@ export default function Terminal() {
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html:"&nbsp;"+line?.replace(/ /g, "&nbsp;"),
+                    __html: "&nbsp;" + line?.replace(/ /g, "&nbsp;"),
                   }}
                 />
               )}
