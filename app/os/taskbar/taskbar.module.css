@@ -1,0 +1,159 @@
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 1000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.startButton {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.startButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.startIcon {
+  font-size: 18px;
+  height: auto;
+  width: 24px;
+}
+
+.searchButton {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.searchIcon {
+  font-size: 16px;
+  height: auto;
+  width: 20px;
+}
+
+.openApps {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.appIcon {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.appIcon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.appIconImage {
+  font-size: 18px;
+  margin-bottom: 2px;
+  height: 24px;
+  width: 24px;
+}
+
+.appIndicator {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #0078d4;
+  border-radius: 50%;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.systemIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.systemIcon {
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  height: auto;
+  width: 28px;
+  transition: background-color 0.2s ease;
+}
+
+.systemIcon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.clock {
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.clock:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.time {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.date {
+  font-size: 12px;
+  opacity: 0.8;
+  line-height: 1.2;
+}

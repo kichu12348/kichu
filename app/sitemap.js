@@ -1,12 +1,12 @@
 const URL = "https://kichu.space";
 
 export default async function sitemap() {
-  // Define static routes. Since it's a single page, only include the root.
-  const routes = [""].map((route) => ({
+  // Define static routes
+  const routes = ["", "/terminal", "/not-about-you","/os"].map((route) => ({
     url: `${URL}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: "monthly", // Or 'yearly' if content rarely changes
-    priority: 1.0, // Homepage typically has highest priority
+    priority: route === "" ? 1.0 : 0.8, // Homepage has highest priority, other pages slightly lower
   }));
 
   // If you have dynamic routes (e.g., blog posts), fetch them and add them here

@@ -1,0 +1,193 @@
+@font-face {
+  font-family: "Perfect DOS VGA 437 WIN";
+  src: url("/fonts/perfect-dos-win.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.terminalWindow {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  border-radius: 5px;
+  font-family: "Perfect DOS VGA 437 WIN", "Courier New", monospace;
+  font-size: 16px;
+  color: #ffd700;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 223, 0, 0.2), inset 0 0 15px rgba(0, 0, 0, 0.7);
+  position: relative;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+}
+
+.titleBar {
+  background: linear-gradient(to bottom, #333, #111);
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  border-bottom: 1px solid #444;
+}
+
+.titleText {
+  font-family: "Perfect DOS VGA 437 WIN", monospace;
+  font-size: 12px;
+  color: #ffd700;
+  font-weight: normal;
+  text-shadow: 0 0 3px #ffd700;
+}
+
+.windowControls {
+  display: flex;
+  gap: 4px;
+}
+
+.controlButton {
+  width: 16px;
+  height: 16px;
+  background-color: #444;
+  border: 1px solid #666;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Perfect DOS VGA 437 WIN", monospace;
+  color: #ffd700;
+  border-radius: 2px;
+}
+
+.controlButton:hover {
+  background-color: #555;
+  box-shadow: 0 0 5px rgba(255, 223, 0, 0.3);
+}
+
+.terminalContent {
+  height: calc(100% - 25px);
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #000000;
+  position: relative;
+  z-index: 2;
+}
+
+.terminalContent::-webkit-scrollbar {
+  width: 5px;
+}
+
+.terminalContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminalContent::-webkit-scrollbar-thumb {
+  background-color: #ffd700;
+  box-shadow: 0 0 5px #ffd700;
+}
+
+.terminalOutput {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+.terminalLine {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: flex;
+  min-height: 1.5em;
+}
+
+.prompt {
+  color: #ffd700;
+  margin-right: 0.5em;
+  opacity: 0.7;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  background-color: #ffd700;
+  animation: blink 1s step-end infinite;
+  box-shadow: 0 0 5px #ffd700;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.inputLine {
+  display: flex;
+  align-items: center;
+}
+
+.terminalInput {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffd700;
+  text-shadow: 0 0 5px gold, 0 0 10px #ffdf00b3;
+  font-family: "Perfect DOS VGA 437 WIN", monospace;
+  font-size: 16px;
+  caret-color: transparent;
+  min-width: 0;
+  width: auto;
+}
+
+.scanlineEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.15) 51%
+  );
+  background-size: 100% 4px;
+  animation: scan 15s linear infinite;
+  opacity: 0.4;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+@keyframes scan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+.vignetteEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 80px 20px rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.asciiArt {
+  font-family: monospace;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: pre;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: #ffd700;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px rgba(255, 223, 0, 0.7);
+  transform-origin: top left;
+  transform: scale(1);
+}

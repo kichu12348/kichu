@@ -1,0 +1,61 @@
+.desktop {
+  width: 100%;
+  height: 100vh;
+  background-image: url('/backgrounds/city-car.jpg');
+  background-size: cover;
+  background-position: center;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+}
+
+.desktopIcons {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 80px);
+  gap: 30px;
+  z-index: 1;
+}
+
+.loadingOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #FF70A6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loadingText {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
