@@ -1,6 +1,7 @@
 import React from "react";
 import { FaExternalLinkAlt, FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { CiGlobe } from "react-icons/ci";
 import styles from "./project-detail-window.module.css";
 
 function ProjectDetailWindow({ project }) {
@@ -18,8 +19,9 @@ function ProjectDetailWindow({ project }) {
       Linkedin: FaLinkedin,
       Info: IoMdInformationCircleOutline,
       ExternalLinkAlt: IoMdInformationCircleOutline,
+      Globe: CiGlobe,
     };
-    return iconMap[iconName] || FaExternalLinkAlt;
+    return iconMap[iconName] || IoMdInformationCircleOutline;
   };
 
   return (
