@@ -12,7 +12,7 @@ function OS() {
 
   const router = useRouter();
 
-  const [isSleeping, setIsSleeping] = React.useState(true);
+  const [isSleeping, setIsSleeping] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(new Date());
 
   React.useEffect(() => {
