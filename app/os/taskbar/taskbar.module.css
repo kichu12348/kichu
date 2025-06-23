@@ -133,6 +133,14 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.systemIcon.offline {
+  color: #ff6b6b;
+}
+
+/* .systemIcon.charging {
+  color: #4caf50;
+} */
+
 .clock {
   color: white;
   text-align: center;

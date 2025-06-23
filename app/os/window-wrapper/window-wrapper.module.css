@@ -3,9 +3,9 @@
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
+  min-width: 300px;
+  min-height: 200px;
   max-width: 90vw;
-  height: 500px;
   max-height: 80vh;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px);
@@ -75,4 +75,88 @@
   padding:0;
   overflow-y: auto;
   color: white;
+}
+
+.resizeHandles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.resizeHandle {
+  position: absolute;
+  pointer-events: all;
+}
+
+.resizeTop {
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.resizeRight {
+  top: 8px;
+  right: 0;
+  bottom: 8px;
+  width: 4px;
+  cursor: ew-resize;
+}
+
+.resizeBottom {
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.resizeLeft {
+  top: 8px;
+  left: 0;
+  bottom: 8px;
+  width: 4px;
+  cursor: ew-resize;
+}
+
+.resizeTopLeft {
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+}
+
+.resizeTopRight {
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: ne-resize;
+}
+
+.resizeBottomLeft {
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: sw-resize;
+}
+
+.resizeBottomRight {
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: se-resize;
+}
+
+.minimized {
+  opacity: 0;
+  transform: translateX(calc(-50% + 0px)) translateY(100vh) scale(0.8);
+  transition: all 0.3s ease;
 }

@@ -5,7 +5,13 @@ import {
   AiOutlineSetting,
   AiOutlineWifi,
 } from "react-icons/ai";
-import { BsBatteryFull } from "react-icons/bs";
+import {
+  BsBatteryFull,
+  BsBatteryHalf,
+  BsBattery,
+  BsBatteryCharging,
+} from "react-icons/bs";
+import { MdSignalWifiOff, MdSignalCellularAlt } from "react-icons/md";
 import styles from "./taskbar.module.css";
 import {
   AiOutlineUser,
@@ -25,6 +31,7 @@ const IconsMap = {
   projectDetail: AiOutlineFileText,
   terminal: IoTerminal,
   codeEditor: VscVscode,
+  settings: AiOutlineSetting,
 };
 
 const getCurrentTime = () => {
@@ -42,18 +49,95 @@ const getCurrentDate = () => {
   });
 };
 
-function Taskbar({ openWindows, onStartMenuToggle, focusWindow }) {
+const getBatteryIcon = (percentage, isCharging) => {
+  if (isCharging) return BsBatteryCharging;
+  if (percentage > 75) return BsBatteryFull;
+  if (percentage > 25) return BsBatteryHalf;
+  return BsBattery;
+};
+
+const getNetworkIcon = (isOnline, connectionType) => {
+  if (!isOnline) return MdSignalWifiOff;
+  if (connectionType === "cellular") return MdSignalCellularAlt;
+  return AiOutlineWifi;
+};
+
+function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
   const handleFocus = (windowId) => focusWindow(windowId);
   const [currentTime, setCurrentTime] = React.useState(getCurrentTime());
   const [currentDate, setCurrentDate] = React.useState(getCurrentDate());
+  const [batteryPercentage, setBatteryPercentage] = React.useState(100);
+  const [isCharging, setIsCharging] = React.useState(false);
+  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
+  const [connectionType, setConnectionType] = React.useState("wifi");
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(getCurrentTime());
       setCurrentDate(getCurrentDate());
     }, 30000);
-    return () => clearInterval(interval);
+
+    // Battery API
+    if (navigator.getBattery) {
+      navigator
+        .getBattery()
+        .then(function (battery) {
+          const level = battery.level * 100;
+          setBatteryPercentage(Math.round(level));
+          setIsCharging(battery.charging);
+
+          const updateBatteryLevel = () =>
+            setBatteryPercentage(Math.round(battery.level * 100));
+          const updateChargingStatus = () => setIsCharging(battery.charging);
+
+          battery.addEventListener("levelchange", updateBatteryLevel);
+          battery.addEventListener("chargingchange", updateChargingStatus);
+        })
+        .catch(() => {
+          console.warn("Battery API not supported");
+        });
+    }
+
+    const updateOnlineStatus = () => setIsOnline(navigator.onLine);
+
+    const updateConnectionType = () => {
+      if (navigator.connection) {
+        const connection =
+          navigator.connection ||
+          navigator.mozConnection ||
+          navigator.webkitConnection;
+        if (connection.type === "cellular") {
+          setConnectionType("cellular");
+        } else {
+          setConnectionType("wifi");
+        }
+      }
+    };
+
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
+
+    if (navigator.connection) {
+      navigator.connection.addEventListener("change", updateConnectionType);
+      updateConnectionType();
+    }
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("online", updateOnlineStatus);
+      window.removeEventListener("offline", updateOnlineStatus);
+
+      if (navigator.connection) {
+        navigator.connection.removeEventListener(
+          "change",
+          updateConnectionType
+        );
+      }
+    };
   }, []);
+
+  const BatteryIcon = getBatteryIcon(batteryPercentage, isCharging);
+  const NetworkIcon = getNetworkIcon(isOnline, connectionType);
 
   return (
     <div className={styles.taskbar}>
@@ -88,9 +172,26 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow }) {
 
       <div className={styles.rightSection}>
         <div className={styles.systemIcons}>
-          <AiOutlineWifi className={styles.systemIcon} />
-          <BsBatteryFull className={styles.systemIcon} />
-          <AiOutlineSetting className={styles.systemIcon} />
+          <NetworkIcon
+            className={`${styles.systemIcon} ${
+              !isOnline ? styles.offline : ""
+            }`}
+            title={
+              isOnline ? `Connected via ${connectionType}` : "No connection"
+            }
+          />
+          <BatteryIcon
+            className={`${styles.systemIcon} ${
+              isCharging ? styles.charging : ""
+            }`}
+            title={`Battery: ${batteryPercentage}% ${
+              isCharging ? "(Charging)" : ""
+            }`}
+          />
+          <AiOutlineSetting
+            className={styles.systemIcon}
+            onClick={() => openWindow("settings")}
+          />
         </div>
 
         <div className={styles.clock}>

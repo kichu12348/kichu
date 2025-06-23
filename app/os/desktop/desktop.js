@@ -10,10 +10,12 @@ import BrowserWindow from "../browser-window/browser-window";
 import Terminal from "../terminal-window/terminal-window";
 import ProjectDetailWindow from "../project-detail-viewer/project-detail-window";
 import CodeEditor from "../code-window/code-window";
+import Settings from "../settings-window/settings-window";
 import {
   AiOutlineUser,
   AiOutlineMail,
   AiOutlineFileText,
+  AiOutlineSetting
 } from "react-icons/ai";
 import { MdFolderOpen } from "react-icons/md";
 import { FaFirefoxBrowser } from "react-icons/fa";
@@ -21,8 +23,9 @@ import { IoTerminal } from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
 import styles from "./desktop.module.css";
 
-function Desktop() {
+function Desktop({goSleep}) {
   const [openWindows, setOpenWindows] = useState([]);
+  const [minimizedWindows, setMinimizedWindows] = useState([]);
   const [showStartMenu, setShowStartMenu] = useState(false);
   const [currentWindowZindex, setCurrentWindowZIndex] = useState(10);
   const [windowZIndexes, setWindowZIndexes] = useState({});
@@ -63,6 +66,11 @@ function Desktop() {
   ];
 
   const focusWindow = (windowId) => {
+    // If window is minimized, restore it
+    if (minimizedWindows.includes(windowId)) {
+      setMinimizedWindows(minimizedWindows.filter(id => id !== windowId));
+    }
+    
     const newZIndex = currentWindowZindex + 1;
     setCurrentWindowZIndex(newZIndex);
     setWindowZIndexes((prev) => ({
@@ -92,8 +100,15 @@ function Desktop() {
     }
   };
 
+  const minimizeWindow = (windowId) => {
+    if (!minimizedWindows.includes(windowId)) {
+      setMinimizedWindows([...minimizedWindows, windowId]);
+    }
+  };
+
   const closeWindow = (windowId) => {
     setOpenWindows(openWindows.filter((id) => id !== windowId));
+    setMinimizedWindows(minimizedWindows.filter(id => id !== windowId));
     setWindowZIndexes((prev) => {
       const newZIndexes = { ...prev };
       delete newZIndexes[windowId];
@@ -146,6 +161,8 @@ function Desktop() {
               icon={AiOutlineFileText}
               onClose={() => closeWindow(windowId)}
               onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              isMinimized={minimizedWindows.includes(windowId)}
               zIndex={windowZIndexes[windowId] || 10}
             >
               <ProjectDetailWindow project={projectData} />
@@ -161,9 +178,28 @@ function Desktop() {
               icon={VscVscode}
               onClose={() => closeWindow(windowId)}
               onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              isMinimized={minimizedWindows.includes(windowId)}
               zIndex={windowZIndexes[windowId] || 10}
             >
               <CodeEditor />
+            </WindowWrapper>
+          );
+        }
+
+        if(windowId === "settings") {
+          return (
+            <WindowWrapper
+              key={windowId}
+              title="Settings"
+              icon={AiOutlineSetting}
+              onClose={() => closeWindow(windowId)}
+              onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              isMinimized={minimizedWindows.includes(windowId)}
+              zIndex={windowZIndexes[windowId] || 10}
+            >
+              <Settings />
             </WindowWrapper>
           );
         }
@@ -177,6 +213,8 @@ function Desktop() {
             icon={iconData.icon}
             onClose={() => closeWindow(windowId)}
             onFocus={() => focusWindow(windowId)}
+            onMinimize={() => minimizeWindow(windowId)}
+            isMinimized={minimizedWindows.includes(windowId)}
             zIndex={windowZIndexes[windowId] || 10}
           >
             <WindowComponent openWindow={openWindow} />
@@ -188,13 +226,16 @@ function Desktop() {
         <StartMenu
           onClose={() => setShowStartMenu(false)}
           openWindow={openWindow}
+          goSleep={goSleep}
         />
       )}
 
       <Taskbar
         openWindows={openWindows}
+        minimizedWindows={minimizedWindows}
         onStartMenuToggle={() => setShowStartMenu(!showStartMenu)}
         focusWindow={focusWindow}
+        openWindow={openWindow}
       />
     </div>
   );

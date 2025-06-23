@@ -10,7 +10,7 @@ import { FaMoon } from "react-icons/fa6";
 import { VscVscode } from "react-icons/vsc";
 import styles from "./start-menu.module.css";
 
-function StartMenu({ onClose, openWindow }) {
+function StartMenu({ onClose, openWindow, goSleep }) {
   const pinnedApps = [
     { id: "about", icon: AiOutlineUser, name: "About Me" },
     { id: "projects", icon: IoFolderOpen, name: "Projects" },
@@ -56,13 +56,31 @@ function StartMenu({ onClose, openWindow }) {
         </div>
 
         <div className={styles.bottomSection}>
-          <button className={styles.settingsButton}>
+          <button
+            className={styles.settingsButton}
+            onClick={() => {
+              openWindow("settings");
+              onClose();
+            }}
+          >
             <MdSettings className={styles.settingsIcon} />
           </button>
 
           <div className={styles.powerMenu}>
             {powerOptions.map((option, index) => (
-              <button key={index} className={styles.powerButton}>
+              <button
+                key={index}
+                className={styles.powerButton}
+                onClick={() => {
+                  if (option.name === "Sleep") {
+                    goSleep.sleep();
+                  }
+                  else if (option.name === "Shut down") {
+                    goSleep.shutDown();
+                  }
+                  onClose();
+                }}
+              >
                 <option.icon className={styles.powerIcon} />
               </button>
             ))}
