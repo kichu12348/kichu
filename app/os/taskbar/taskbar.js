@@ -66,12 +66,19 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
   const handleFocus = (windowId) => focusWindow(windowId);
   const [currentTime, setCurrentTime] = React.useState(getCurrentTime());
   const [currentDate, setCurrentDate] = React.useState(getCurrentDate());
-  const [batteryPercentage, setBatteryPercentage] = React.useState(100);
+  const [batteryPercentage, setBatteryPercentage] = React.useState(null);
   const [isCharging, setIsCharging] = React.useState(false);
-  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
+  const [isOnline, setIsOnline] = React.useState(null);
   const [connectionType, setConnectionType] = React.useState("wifi");
+  const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
+    // Set client-side flag
+    setIsClient(true);
+    
+    // Initialize client-side values
+    setIsOnline(navigator.onLine);
+    
     const interval = setInterval(() => {
       setCurrentTime(getCurrentTime());
       setCurrentDate(getCurrentDate());
@@ -95,7 +102,10 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
         })
         .catch(() => {
           console.warn("Battery API not supported");
+          setBatteryPercentage(100); // Fallback value
         });
+    } else {
+      setBatteryPercentage(100); // Fallback value
     }
 
     const updateOnlineStatus = () => setIsOnline(navigator.onLine);
@@ -136,8 +146,12 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
     };
   }, []);
 
-  const BatteryIcon = getBatteryIcon(batteryPercentage, isCharging);
-  const NetworkIcon = getNetworkIcon(isOnline, connectionType);
+  // Use fallback values during SSR and initial client render
+  const displayBatteryPercentage = batteryPercentage ?? 100;
+  const displayIsOnline = isOnline ?? true;
+  
+  const BatteryIcon = getBatteryIcon(displayBatteryPercentage, isCharging);
+  const NetworkIcon = getNetworkIcon(displayIsOnline, connectionType);
 
   return (
     <div className={styles.taskbar}>
@@ -174,19 +188,25 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
         <div className={styles.systemIcons}>
           <NetworkIcon
             className={`${styles.systemIcon} ${
-              !isOnline ? styles.offline : ""
+              !displayIsOnline ? styles.offline : ""
             }`}
             title={
-              isOnline ? `Connected via ${connectionType}` : "No connection"
+              isClient 
+                ? (displayIsOnline ? `Connected via ${connectionType}` : "No connection")
+                : "Network status"
             }
           />
           <BatteryIcon
             className={`${styles.systemIcon} ${
               isCharging ? styles.charging : ""
             }`}
-            title={`Battery: ${batteryPercentage}% ${
-              isCharging ? "(Charging)" : ""
-            }`}
+            title={
+              isClient
+                ? `Battery: ${displayBatteryPercentage}% ${
+                    isCharging ? "(Charging)" : ""
+                  }`
+                : "Battery status"
+            }
           />
           <AiOutlineSetting
             className={styles.systemIcon}

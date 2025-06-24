@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { FaPlay, FaTimes } from "react-icons/fa";
 import styles from "./code-window.module.css";
@@ -23,37 +23,13 @@ function CodeEditor() {
     setShowOutput(true);
 
     // Create Web Worker for code execution
-    const workerCode = `
-      self.onmessage = function(e) {
-        const code = e.data;
-        const originalConsole = console;
-        const logs = [];
-        
-        // Override console methods
-        console.log = (...args) => logs.push({ type: 'log', args });
-        console.error = (...args) => logs.push({ type: 'error', args });
-        console.warn = (...args) => logs.push({ type: 'warn', args });
-        console.info = (...args) => logs.push({ type: 'info', args });
-        
-        try {
-          eval(code);
-          self.postMessage({ success: true, logs });
-        } catch (error) {
-          logs.push({ type: 'error', args: [error.message] });
-          self.postMessage({ success: false, logs });
-        }
-      };
-    `;
-
-    const blob = new Blob([workerCode], { type: "application/javascript" });
-    workerRef.current = new Worker(URL.createObjectURL(blob));
+    workerRef.current = new Worker(new URL('./code-executor.worker.js', import.meta.url));
 
     workerRef.current.onmessage = (e) => {
       const { logs } = e.data;
       setOutput(logs);
       setIsRunning(false);
       workerRef.current.terminate();
-      URL.revokeObjectURL(workerRef.current);
     };
 
     workerRef.current.onerror = (error) => {
@@ -86,6 +62,17 @@ function CodeEditor() {
       })
       .join(" ");
   };
+
+
+  useEffect(()=>{
+    const handleCtrlS = (event) => {
+      if (event.ctrlKey && event.key === "s") {
+        event.preventDefault();
+        executeCode();
+      }
+    }
+    document.addEventListener("keydown", handleCtrlS);
+  },[]);
 
   return (
     <div className={styles.codeEditor}>

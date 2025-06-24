@@ -2,9 +2,40 @@ import React from "react";
 import { AiOutlineMail, AiOutlineGithub } from "react-icons/ai";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa6";
+import { submitContactForm } from "../functions/api";
 import styles from "./contact-window.module.css";
 
 function ContactWindow() {
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [message, setMessage] = React.useState("");
+  const [statusMessage, setStatusMessage] = React.useState("");
+  const [messageType, setMessageType] = React.useState(""); // "success" or "error"
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !message) {
+      setStatusMessage("Please fill in all fields.");
+      setMessageType("error");
+      return;
+    }
+
+    const response = await submitContactForm({ name, email, message });
+    if (response.success) {
+      setStatusMessage("Message sent successfully!");
+      setMessageType("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } else {
+      setStatusMessage(`Error: ${response.error}`);
+      setMessageType("error");
+    }
+  }
+
+
+
   return (
     <div className={styles.contact}>
       <div className={styles.header}>
@@ -57,15 +88,28 @@ function ContactWindow() {
 
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Message</h3>
-          <form className={styles.form}>
+          {statusMessage && (
+            <div className={`${styles.statusMessage} ${styles[messageType]}`}>
+              {statusMessage}
+            </div>
+          )}
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>
-              <input type="text" placeholder="Name" className={styles.input} />
+              <input type="text" placeholder="Name" 
+              className={styles.input} 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              />
             </div>
             <div className={styles.inputGroup}>
               <input
                 type="email"
                 placeholder="Email"
                 className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className={styles.inputGroup}>
@@ -73,6 +117,9 @@ function ContactWindow() {
                 placeholder="Message"
                 className={styles.textarea}
                 rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
               />
             </div>
             <button type="submit" className={styles.sendButton}>
