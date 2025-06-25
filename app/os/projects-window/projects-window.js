@@ -38,12 +38,10 @@ function ProjectsWindow({ openWindow }) {
               </div>
             </div>
             <div className={styles.techStack}>
-              {project.tech.slice(0, 3).join(", ")}
-              {project.tech.length > 3 && "..."}
+              {project.tech.slice(0, 2).join(", ")}
+              {project.tech.length > 2 && "..."}
             </div>
-            <div className={styles.linksCount}>
-              {project.links.length} link{project.links.length !== 1 ? "s" : ""}
-            </div>
+            <div className={styles.linksCount}>{project.links.length}</div>
             <div className={styles.collaboratorsCount}>
               {project.collaborators ? project.collaborators.length : 0}
             </div>
@@ -52,7 +50,7 @@ function ProjectsWindow({ openWindow }) {
       </div>
       <div className={styles.footer}>
         <div className={styles.footerText}>
-          {projects.length} file{projects.length !== 1 ? "s" : ""} found
+          {projects.length} project{projects.length !== 1 ? "s" : ""}
         </div>
       </div>
     </div>

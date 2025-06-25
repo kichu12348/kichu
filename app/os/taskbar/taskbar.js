@@ -219,10 +219,6 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
                 : "Battery status"
             }
           />
-          <AiOutlineSetting
-            className={styles.systemIcon}
-            onClick={() => openWindow("settings")}
-          />
         </div>
 
         <div className={styles.clock}>

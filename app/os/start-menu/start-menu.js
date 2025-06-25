@@ -14,7 +14,6 @@ import styles from "./start-menu.module.css";
 function StartMenu({ onClose, openWindow, goSleep }) {
   const pinnedApps = [
     { id: "about", icon: AiOutlineUser, name: "About Me" },
-    // { id: "projects", icon: IoFolderOpen, name: "Projects" },
     { id: "contact", icon: AiOutlineMail, name: "Contact" },
     { id: "codeEditor", icon: VscVscode, name: "Code" },
     { id: "musicPlayer", icon: IoMusicalNotesSharp, name: "Music Player" },

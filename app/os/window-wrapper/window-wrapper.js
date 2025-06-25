@@ -18,11 +18,16 @@ function WindowWrapper({
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
-  const [resizeDirection, setResizeDirection] = useState('');
+  const [resizeDirection, setResizeDirection] = useState("");
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ width: 600, height: 500 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [resizeStart, setResizeStart] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
   const windowRef = useRef(null);
 
   const handleMouseDown = (e) => {
@@ -65,16 +70,16 @@ function WindowWrapper({
       const deltaY = e.clientY - resizeStart.y;
       let newSize = { ...size };
 
-      if (resizeDirection.includes('right')) {
+      if (resizeDirection.includes("right")) {
         newSize.width = Math.max(300, resizeStart.width + deltaX);
       }
-      if (resizeDirection.includes('left')) {
+      if (resizeDirection.includes("left")) {
         newSize.width = Math.max(300, resizeStart.width - deltaX);
       }
-      if (resizeDirection.includes('bottom')) {
+      if (resizeDirection.includes("bottom")) {
         newSize.height = Math.max(200, resizeStart.height + deltaY);
       }
-      if (resizeDirection.includes('top')) {
+      if (resizeDirection.includes("top")) {
         newSize.height = Math.max(200, resizeStart.height - deltaY);
       }
 
@@ -85,7 +90,7 @@ function WindowWrapper({
   const handleMouseUp = () => {
     setIsDragging(false);
     setIsResizing(false);
-    setResizeDirection('');
+    setResizeDirection("");
   };
 
   const handleMinimize = () => {
@@ -107,23 +112,29 @@ function WindowWrapper({
   return (
     <div
       ref={windowRef}
-      className={`${styles.windowWrapper} ${isMinimized ? styles.minimized : ''}`}
+      className={`${styles.windowWrapper} ${
+        isMinimized ? styles.minimized : ""
+      }`}
       onClick={handleWindowClick}
       style={{
         transform: `translateX(calc(-50% + ${position.x}px)) translateY(${position.y}px)`,
         zIndex: zIndex,
         width: size.width,
         height: size.height,
-        display: isMinimized ? 'none' : 'block',
+        display: isMinimized ? "none" : "block",
       }}
     >
       <div className={styles.windowHeader} onMouseDown={handleMouseDown}>
         <div className={styles.titleSection}>
           <Icon className={styles.titleIcon} />
-          <span className={styles.title}>{title}</span>
+          <span className={styles.title}>
+            {title && title.length > 18
+              ? title.slice(0, 18).trim() + "..."
+              : title || "Untitled"}
+          </span>
         </div>
         <div className={styles.controls}>
-          <button 
+          <button
             className={`${styles.controlButton} ${styles.minimize}`}
             onClick={handleMinimize}
           >
@@ -141,40 +152,40 @@ function WindowWrapper({
         </div>
       </div>
       <div className={styles.windowBody}>{children}</div>
-      
+
       {/* Resize handles */}
       <div className={styles.resizeHandles}>
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeTop}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'top')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "top")}
         />
         {/* <div 
           className={`${styles.resizeHandle} ${styles.resizeRight}`}
           onMouseDown={(e) => handleResizeMouseDown(e, 'right')}
         /> */}
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeBottom}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'bottom')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "bottom")}
         />
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeLeft}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'left')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "left")}
         />
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeTopLeft}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'top-left')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "top-left")}
         />
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeTopRight}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'top-right')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "top-right")}
         />
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeBottomLeft}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'bottom-left')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "bottom-left")}
         />
-        <div 
+        <div
           className={`${styles.resizeHandle} ${styles.resizeBottomRight}`}
-          onMouseDown={(e) => handleResizeMouseDown(e, 'bottom-right')}
+          onMouseDown={(e) => handleResizeMouseDown(e, "bottom-right")}
         />
       </div>
     </div>

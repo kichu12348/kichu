@@ -146,3 +146,103 @@
   font-family: 'SF Mono', 'Monaco', monospace;
 }
 
+/* Tablet styles */
+@media (max-width: 1024px) {
+  .directoryHeader,
+  .projectFile {
+    grid-template-columns: 1fr 150px 80px;
+    gap: 16px;
+    padding: 12px 20px;
+  }
+  
+  .collaboratorsCount {
+    display: none;
+  }
+  
+  .directoryHeader div:last-child {
+    display: none;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .directoryHeader,
+  .projectFile {
+    grid-template-columns: 1fr 60px;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  
+  .techStack,
+  .directoryHeader div:nth-child(2) {
+    display: none;
+  }
+  
+  .fileIcon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .fileName {
+    font-size: 13px;
+  }
+  
+  .projectDescription {
+    font-size: 11px;
+  }
+  
+  .linksCount {
+    font-size: 11px;
+  }
+  
+  .footer {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .directoryHeader,
+  .projectFile {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 12px;
+  }
+  
+  .linksCount,
+  .directoryHeader div:nth-child(3) {
+    display: none;
+  }
+  
+  .fileNameSection {
+    gap: 8px;
+  }
+  
+  .fileIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .codeIcon {
+    font-size: 14px;
+  }
+  
+  .fileName {
+    font-size: 12px;
+  }
+  
+  .projectDescription {
+    font-size: 10px;
+  }
+  
+  .footer {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  
+  .directoryHeader {
+    min-height: 40px;
+  }
+}
+
