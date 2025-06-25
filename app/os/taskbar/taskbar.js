@@ -22,6 +22,7 @@ import { MdFolderOpen } from "react-icons/md";
 import { FaFirefoxBrowser } from "react-icons/fa";
 import { IoTerminal } from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
+import { IoMusicalNotesSharp } from "react-icons/io5";
 
 const IconsMap = {
   about: AiOutlineUser,
@@ -32,7 +33,17 @@ const IconsMap = {
   terminal: IoTerminal,
   codeEditor: VscVscode,
   settings: AiOutlineSetting,
+  musicPlayer: IoMusicalNotesSharp,
 };
+
+const getIconComponent = (iconName) => {
+  const IconComponent = IconsMap[iconName];
+  if (!IconComponent) {
+    console.warn(`Icon "${iconName}" not found in IconsMap.`);
+    return AiOutlineFileText; // Fallback icon
+  }
+  return IconComponent;
+}
 
 const getCurrentTime = () => {
   return new Date().toLocaleTimeString([], {
@@ -175,7 +186,7 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
                 ? React.createElement(IconsMap.projectDetail, {
                     className: styles.appIconImage,
                   })
-                : React.createElement(IconsMap[windowId], {
+                : React.createElement(getIconComponent(windowId), {
                     className: styles.appIconImage,
                   })}
               <div className={styles.appIndicator}></div>

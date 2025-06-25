@@ -11,6 +11,7 @@ import Terminal from "../terminal-window/terminal-window";
 import ProjectDetailWindow from "../project-detail-viewer/project-detail-window";
 import CodeEditor from "../code-window/code-window";
 import Settings from "../settings-window/settings-window";
+import MusicPlayer from "../music-player-window/music-player";
 import {
   AiOutlineUser,
   AiOutlineMail,
@@ -19,7 +20,7 @@ import {
 } from "react-icons/ai";
 import { MdFolderOpen } from "react-icons/md";
 import { FaFirefoxBrowser } from "react-icons/fa";
-import { IoTerminal } from "react-icons/io5";
+import { IoTerminal,IoMusicalNotesSharp} from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
 import styles from "./desktop.module.css";
 
@@ -183,6 +184,23 @@ function Desktop({goSleep}) {
               zIndex={windowZIndexes[windowId] || 10}
             >
               <CodeEditor />
+            </WindowWrapper>
+          );
+        }
+
+        if(windowId==="musicPlayer"){
+          return (
+            <WindowWrapper
+              key={windowId}
+              title="Music Player"
+              icon={IoMusicalNotesSharp}
+              onClose={() => closeWindow(windowId)}
+              onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              isMinimized={minimizedWindows.includes(windowId)}
+              zIndex={windowZIndexes[windowId] || 10}
+            >
+              <MusicPlayer />
             </WindowWrapper>
           );
         }
