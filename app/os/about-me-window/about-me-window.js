@@ -40,7 +40,6 @@ function AboutMeWindow() {
     "Backend Development",
     "Systems Programming",
     "Database Design",
-    "API Development",
     "Cloud Computing",
     "DevOps",
     "Cross-Platform Development",
