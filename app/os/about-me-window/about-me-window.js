@@ -26,6 +26,8 @@ import {
   SiFlask,
   SiHono,
   SiSocketdotio,
+  SiTauri,
+  SiBun
 } from "react-icons/si";
 import { FaAws, FaJava, FaCss3, FaHtml5, FaLinkedinIn } from "react-icons/fa";
 
@@ -38,6 +40,11 @@ function AboutMeWindow() {
     "Backend Development",
     "Systems Programming",
     "Database Design",
+    "API Development",
+    "Cloud Computing",
+    "DevOps",
+    "Cross-Platform Development",
+    "Real-Time Applications",
   ];
 
   const techStack = [
@@ -47,9 +54,11 @@ function AboutMeWindow() {
     { name: "CSS Modules", icon: <FaCss3 />, color: "#1572B6" },
     { name: "React Native", icon: <TbBrandReactNative />, color: "#61DAFB" },
     { name: "Expo", icon: <SiExpo />, color: "#000020" },
+    { name: "Tauri", icon: <SiTauri />, color: "#000000" },
     { name: "GitHub", icon: <AiOutlineGithub />, color: "#181717" },
     { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
     { name: "Deno", icon: <SiDeno />, color: "#000000" },
+    { name: "Bun", icon: <SiBun />, color: "rgb(249 241 225)"},
     { name: "Express", icon: <SiExpress />, color: "#000000" },
     { name: "Hono", icon: <SiHono />, color: "#E36002" },
     { name: "Socket.io", icon: <SiSocketdotio />, color: "#010101" },
