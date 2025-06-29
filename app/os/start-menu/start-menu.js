@@ -5,18 +5,19 @@ import {
   AiOutlinePoweroff,
 } from "react-icons/ai";
 import { MdSettings } from "react-icons/md";
-import { IoFolderOpen } from "react-icons/io5";
-import { FaMoon } from "react-icons/fa6";
+import { FaMoon,FaGamepad } from "react-icons/fa6";
 import { VscVscode } from "react-icons/vsc";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import styles from "./start-menu.module.css";
 
 function StartMenu({ onClose, openWindow, goSleep }) {
   const pinnedApps = [
-    { id: "about", icon: AiOutlineUser, name: "About Me" },
+    // { id: "about", icon: AiOutlineUser, name: "About Me" },
     { id: "contact", icon: AiOutlineMail, name: "Contact" },
+    { id: "doom", icon: FaGamepad, name: "Doom" },
     { id: "codeEditor", icon: VscVscode, name: "Code" },
     { id: "musicPlayer", icon: IoMusicalNotesSharp, name: "Music Player" },
+    
   ];
 
   const powerOptions = [

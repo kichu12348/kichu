@@ -11,11 +11,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
   title: "Mahadevan Reji",
-  description: "Full Stack Developer specializing in React, Node.js, Next.js and modern web technologies with experience building scalable applications",
-  keywords: ["full stack developer", "web developer", "React", "Next.js", "Node.js", "JavaScript", "TypeScript", "web engineering"],
+  description:
+    "Full Stack Developer specializing in React, Node.js, Next.js and modern web technologies with experience building scalable applications",
+  keywords: [
+    "full stack developer",
+    "web developer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "JavaScript",
+    "TypeScript",
+    "web engineering",
+  ],
   authors: [{ name: "Mahadevan Reji" }],
   creator: "Mahadevan Reji",
   publisher: "Mahadevan Reji",
@@ -49,8 +58,8 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   alternates: {
@@ -60,17 +69,22 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: 'rgb(248, 250, 252)',
-  width: 'device-width',
+  themeColor: "rgb(248, 250, 252)",
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  colorScheme: 'light dark',
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      {/* <head>
+        <script src="/js-dos/js-dos.js"></script>
+        <link rel="stylesheet" href="/js-dos/js-dos.css" />
+        <script>emulators.pathPrefix = "/js-dos/";</script>
+      </head> */}
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

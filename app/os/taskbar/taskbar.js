@@ -19,7 +19,7 @@ import {
   AiOutlineFileText,
 } from "react-icons/ai";
 import { MdFolderOpen } from "react-icons/md";
-import { FaFirefoxBrowser } from "react-icons/fa";
+import { FaFirefoxBrowser, FaGamepad } from "react-icons/fa";
 import { IoTerminal } from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
 import { IoMusicalNotesSharp } from "react-icons/io5";
@@ -34,6 +34,7 @@ const IconsMap = {
   codeEditor: VscVscode,
   settings: AiOutlineSetting,
   musicPlayer: IoMusicalNotesSharp,
+  doom: FaGamepad,
 };
 
 const getIconComponent = (iconName) => {
@@ -43,7 +44,7 @@ const getIconComponent = (iconName) => {
     return AiOutlineFileText; // Fallback icon
   }
   return IconComponent;
-}
+};
 
 const getCurrentTime = () => {
   return new Date().toLocaleTimeString([], {
@@ -86,10 +87,10 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
   React.useEffect(() => {
     // Set client-side flag
     setIsClient(true);
-    
+
     // Initialize client-side values
     setIsOnline(navigator.onLine);
-    
+
     const interval = setInterval(() => {
       setCurrentTime(getCurrentTime());
       setCurrentDate(getCurrentDate());
@@ -160,7 +161,7 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
   // Use fallback values during SSR and initial client render
   const displayBatteryPercentage = batteryPercentage ?? 100;
   const displayIsOnline = isOnline ?? true;
-  
+
   const BatteryIcon = getBatteryIcon(displayBatteryPercentage, isCharging);
   const NetworkIcon = getNetworkIcon(displayIsOnline, connectionType);
 
@@ -202,8 +203,10 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
               !displayIsOnline ? styles.offline : ""
             }`}
             title={
-              isClient 
-                ? (displayIsOnline ? `Connected via ${connectionType}` : "No connection")
+              isClient
+                ? displayIsOnline
+                  ? `Connected via ${connectionType}`
+                  : "No connection"
                 : "Network status"
             }
           />

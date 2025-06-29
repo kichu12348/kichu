@@ -12,19 +12,20 @@ import ProjectDetailWindow from "../project-detail-viewer/project-detail-window"
 import CodeEditor from "../code-window/code-window";
 import Settings from "../settings-window/settings-window";
 import MusicPlayer from "../music-player-window/music-player";
+import Doom from "../doom-window/doom-window";
 import {
   AiOutlineUser,
   AiOutlineMail,
   AiOutlineFileText,
-  AiOutlineSetting
+  AiOutlineSetting,
 } from "react-icons/ai";
 import { MdFolderOpen } from "react-icons/md";
-import { FaFirefoxBrowser } from "react-icons/fa";
-import { IoTerminal,IoMusicalNotesSharp} from "react-icons/io5";
+import { FaFirefoxBrowser, FaGamepad } from "react-icons/fa";
+import { IoTerminal, IoMusicalNotesSharp } from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
 import styles from "./desktop.module.css";
 
-function Desktop({goSleep}) {
+function Desktop({ goSleep }) {
   const [openWindows, setOpenWindows] = useState([]);
   const [minimizedWindows, setMinimizedWindows] = useState([]);
   const [showStartMenu, setShowStartMenu] = useState(false);
@@ -69,9 +70,9 @@ function Desktop({goSleep}) {
   const focusWindow = (windowId) => {
     // If window is minimized, restore it
     if (minimizedWindows.includes(windowId)) {
-      setMinimizedWindows(minimizedWindows.filter(id => id !== windowId));
+      setMinimizedWindows(minimizedWindows.filter((id) => id !== windowId));
     }
-    
+
     const newZIndex = currentWindowZindex + 1;
     setCurrentWindowZIndex(newZIndex);
     setWindowZIndexes((prev) => ({
@@ -109,7 +110,7 @@ function Desktop({goSleep}) {
 
   const closeWindow = (windowId) => {
     setOpenWindows(openWindows.filter((id) => id !== windowId));
-    setMinimizedWindows(minimizedWindows.filter(id => id !== windowId));
+    setMinimizedWindows(minimizedWindows.filter((id) => id !== windowId));
     setWindowZIndexes((prev) => {
       const newZIndexes = { ...prev };
       delete newZIndexes[windowId];
@@ -188,7 +189,7 @@ function Desktop({goSleep}) {
           );
         }
 
-        if(windowId==="musicPlayer"){
+        if (windowId === "musicPlayer") {
           return (
             <WindowWrapper
               key={windowId}
@@ -205,7 +206,7 @@ function Desktop({goSleep}) {
           );
         }
 
-        if(windowId === "settings") {
+        if (windowId === "settings") {
           return (
             <WindowWrapper
               key={windowId}
@@ -218,6 +219,25 @@ function Desktop({goSleep}) {
               zIndex={windowZIndexes[windowId] || 10}
             >
               <Settings />
+            </WindowWrapper>
+          );
+        }
+
+        if (windowId === "doom") {
+          return (
+            <WindowWrapper
+              key={windowId}
+              title="Doom"
+              icon={FaGamepad}
+              onClose={() => closeWindow(windowId)}
+              onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              isMinimized={minimizedWindows.includes(windowId)}
+              zIndex={windowZIndexes[windowId] || 10}
+            >
+              <Doom 
+              bundleUrl='digger.jsdos'
+              />
             </WindowWrapper>
           );
         }

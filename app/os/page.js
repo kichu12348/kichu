@@ -46,12 +46,12 @@ function OS() {
     setIsSleeping(true);
   };
 
-  const goSleep={
+  const goSleep = {
     sleep: handleSleep,
-    shutDown:()=>{
+    shutDown: () => {
       router.push("/");
-    }
-  }
+    },
+  };
 
   const formatTime = (date) => {
     return date.toLocaleTimeString([], {
@@ -71,23 +71,25 @@ function OS() {
   };
 
   return (
-    <WindowProvider>
-      <div className={styles.osContainer}>
-        {isSleeping && (
-          <div className={styles.sleepOverlay} onClick={handleWakeUp}>
-            <div className={styles.sleepMessage}>
-              <IoLockClosed className={styles.lockIcon} />
-              <div className={styles.timeDisplay}>
-                <h1 className={styles.time}>{formatTime(currentTime)}</h1>
-                <p className={styles.date}>{formatDate(currentTime)}</p>
+    <>
+      <WindowProvider>
+        <div className={styles.osContainer}>
+          {isSleeping && (
+            <div className={styles.sleepOverlay} onClick={handleWakeUp}>
+              <div className={styles.sleepMessage}>
+                <IoLockClosed className={styles.lockIcon} />
+                <div className={styles.timeDisplay}>
+                  <h1 className={styles.time}>{formatTime(currentTime)}</h1>
+                  <p className={styles.date}>{formatDate(currentTime)}</p>
+                </div>
+                <p className={styles.wakeUpText}>Click anywhere to wake up</p>
               </div>
-              <p className={styles.wakeUpText}>Click anywhere to wake up</p>
             </div>
-          </div>
-        )}
-        <Desktop goSleep={goSleep} />
-      </div>
-    </WindowProvider>
+          )}
+          <Desktop goSleep={goSleep} />
+        </div>
+      </WindowProvider>
+    </>
   );
 }
 
