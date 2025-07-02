@@ -27,9 +27,16 @@ import {
   SiHono,
   SiSocketdotio,
   SiTauri,
-  SiBun
+  SiBun,
 } from "react-icons/si";
-import { FaAws, FaJava, FaCss3, FaHtml5, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaAws,
+  FaJava,
+  FaCss3,
+  FaHtml5,
+  FaLinkedinIn,
+  FaNpm,
+} from "react-icons/fa";
 
 import { TbBrandReactNative } from "react-icons/tb";
 import styles from "./about-me-window.module.css";
@@ -57,7 +64,7 @@ function AboutMeWindow() {
     { name: "GitHub", icon: <AiOutlineGithub />, color: "#181717" },
     { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
     { name: "Deno", icon: <SiDeno />, color: "#000000" },
-    { name: "Bun", icon: <SiBun />, color: "rgb(249 241 225)"},
+    { name: "Bun", icon: <SiBun />, color: "rgb(249 241 225)" },
     { name: "Express", icon: <SiExpress />, color: "#000000" },
     { name: "Hono", icon: <SiHono />, color: "#E36002" },
     { name: "Socket.io", icon: <SiSocketdotio />, color: "#010101" },
@@ -70,6 +77,7 @@ function AboutMeWindow() {
     { name: "Vercel", icon: <SiVercel />, color: "#000000" },
     { name: "AWS", icon: <FaAws />, color: "#FF9900" },
     { name: "Google Cloud", icon: <SiGooglecloud />, color: "#4285F4" },
+    { name: "npm", icon: <FaNpm />, color: "#CB3837" },
     { name: "HTML", icon: <FaHtml5 />, color: "#E34F26" },
     { name: "CSS", icon: <FaCss3 />, color: "#1572B6" },
     { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
@@ -99,9 +107,9 @@ function AboutMeWindow() {
       <div className={styles.content}>
         <div className={styles.bio}>
           <p className={styles.bioText}>
-            I&apos;m a passionate full-stack developer with expertise in modern web
-            technologies and a strong foundation in systems programming. I build
-            scalable, efficient solutions that solve real-world problems.
+            I&apos;m a passionate full-stack developer with expertise in modern
+            web technologies and a strong foundation in systems programming. I
+            build scalable, efficient solutions that solve real-world problems.
           </p>
           <p className={styles.bioText}>
             My journey began with curiosity about how things work under the
