@@ -151,7 +151,6 @@ export default function Terminal() {
           "  help              - Show this help message",
           `  echo "expression" - Echo the text back`,
           "  run notsus.exe    - Defo not a sus",
-          "  run quote.exe     - Motivation 🗿",
           "",
         ]);
         break;
