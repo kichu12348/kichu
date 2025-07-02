@@ -319,7 +319,7 @@ export default function ProjectsAdmin() {
               </button>
             </div>
             <div className={styles.tagContainer}>
-              {formData.tech.map((tech, index) => (
+              {formData?.tech?.map((tech, index) => (
                 <div key={index} className={styles.tag}>
                   {tech}
                   <button
@@ -353,7 +353,7 @@ export default function ProjectsAdmin() {
               </button>
             </div>
             <div className={styles.featuresContainer}>
-              {formData.features.map((feature, index) => (
+              {formData?.features?.map((feature, index) => (
                 <div key={index} className={styles.featureItem}>
                   <span>{feature}</span>
                   <button
@@ -379,7 +379,7 @@ export default function ProjectsAdmin() {
             </button>
 
             <div className={styles.linksContainer}>
-              {formData.links.map((link, index) => (
+              {formData?.links?.map((link, index) => (
                 <div key={index} className={styles.linkItem}>
                   <div className={styles.linkForm}>
                     <div className={styles.formGroup}>
@@ -474,7 +474,7 @@ export default function ProjectsAdmin() {
               </button>
             </div>
             <div className={styles.collaboratorsContainer}>
-              {formData.collaborators.map((collab, index) => (
+              {formData?.collaborators?.map((collab, index) => (
                 <div key={index} className={styles.collaboratorItem}>
                   <div className={styles.collaboratorInfo}>
                     <User size={16} />
@@ -528,7 +528,7 @@ export default function ProjectsAdmin() {
           </p>
         ) : (
           <div className={styles.projectsGrid}>
-            {projects.map((project) => (
+            {projects?.map((project) => (
               <div key={project.id} className={styles.projectCard}>
                 <div className={styles.projectHeader}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
@@ -551,7 +551,7 @@ export default function ProjectsAdmin() {
                   {project.description.substring(0, 100)}...
                 </p>
                 <div className={styles.techList}>
-                  {project.tech.map((tech, i) => (
+                  {project?.tech?.map((tech, i) => (
                     <span key={i} className={styles.techBadge}>
                       {tech}
                     </span>

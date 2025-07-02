@@ -17,7 +17,15 @@ export async function middleware(request) {
       return NextResponse.redirect(loginUrl);
     }
     const resposne = await fetch(
-      `${endpoint}/api/auth/is-valid/${adminAuth.value.trim()}`
+      `${endpoint}/api/auth/is-valid/${adminAuth.value.trim()}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminAuth.value.trim()}`,
+        },
+        credentials: "include",
+      }
     );
 
     const data = await resposne.json();
