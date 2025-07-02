@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 const endpoint = process.env.NEXT_PUBLIC_BASE_URL;
 
-
 export async function POST(request) {
   try {
     const { password } = await request.json();
@@ -14,15 +13,16 @@ export async function POST(request) {
         { status: 401 }
       );
     }
-
+    const res = await fetch(`${endpoint}/api/user-token`);
+    const data = await res.json();
     const response = NextResponse.json(
-      { message: "Login successful", success: true },
+      { message: "Login successful", success: true,
+        token: data.token  
+       },
       { status: 200 }
     );
 
-    const res =await fetch(`${endpoint}/api/user-token`);
-    const data = await res.json();
-    if (res.status !== 200 || !data.token|| !res.ok) {
+    if (res.status !== 200 || !data.token || !res.ok) {
       return NextResponse.json(
         { message: "Failed to fetch user token", success: false },
         { status: 500 }

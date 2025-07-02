@@ -84,6 +84,7 @@ function Login() {
       });
       const data = await response.json();
       if (response.ok && data.success) {
+        localStorage.setItem("token", data.token);
         router.push("/admin/projects");
         router.refresh();
       } else {

@@ -33,10 +33,13 @@ export default function ProjectsAdmin() {
   const [success, setSuccess] = useState("");
   const [collaboratorName, setCollaboratorName] = useState("");
   const [collaboratorRole, setCollaboratorRole] = useState("");
+  const [token, setToken] = useState("");
 
   // Fetch projects on load
   useEffect(() => {
     fetchProjects();
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) setToken(storedToken);
   }, []);
 
   const fetchProjects = async () => {
@@ -182,6 +185,7 @@ export default function ProjectsAdmin() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token for authentication
           },
           credentials: "include",
           body: JSON.stringify(formData),
@@ -191,6 +195,7 @@ export default function ProjectsAdmin() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token for authentication
           },
           credentials: "include",
           body: JSON.stringify(formData),
@@ -245,6 +250,10 @@ export default function ProjectsAdmin() {
     try {
       const response = await fetch(`${endpoint}/api/projects/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token for authentication
+        },
       });
 
       if (!response.ok) throw new Error("Failed to delete project");
