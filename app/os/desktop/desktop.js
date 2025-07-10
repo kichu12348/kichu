@@ -238,9 +238,7 @@ function Desktop({ goSleep }) {
               isMinimized={minimizedWindows.includes(windowId)}
               zIndex={windowZIndexes[windowId] || 10}
             >
-              <Doom 
-              bundleUrl='digger.jsdos'
-              />
+              <Doom bundleUrl="digger.jsdos" />
             </WindowWrapper>
           );
         }
