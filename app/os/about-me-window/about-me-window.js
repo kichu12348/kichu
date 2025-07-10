@@ -39,6 +39,7 @@ import {
   FaLinkedinIn,
   FaNpm,
 } from "react-icons/fa";
+import Image from "next/image";
 
 import { TbBrandReactNative } from "react-icons/tb";
 import styles from "./about-me-window.module.css";
@@ -99,7 +100,9 @@ function AboutMeWindow() {
     <div className={styles.aboutMe}>
       <div className={styles.header}>
         <div className={styles.avatar}>
-          <img 
+          <Image
+          width={75}
+          height={75} 
           className={styles.avatarIcon} 
           src="/images/batcat.jpg"
           alt="Kichu A.K.A Betmen"
