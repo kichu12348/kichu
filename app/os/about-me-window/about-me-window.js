@@ -29,6 +29,7 @@ import {
   SiSocketdotio,
   SiTauri,
   SiBun,
+  SiTensorflow,
 } from "react-icons/si";
 import {
   FaAws,
@@ -52,6 +53,7 @@ function AboutMeWindow() {
     "DevOps",
     "Cross-Platform Development",
     "Real-Time Applications",
+    "A Bit of Machine Learning",
   ];
 
   const techStack = [
@@ -79,6 +81,7 @@ function AboutMeWindow() {
     { name: "Vercel", icon: <SiVercel />, color: "#000000" },
     { name: "AWS", icon: <FaAws />, color: "#FF9900" },
     { name: "Google Cloud", icon: <SiGooglecloud />, color: "#4285F4" },
+    { name: "TensorFlow", icon: <SiTensorflow />, color: "#FF6F00" },
     { name: "npm", icon: <FaNpm />, color: "#CB3837" },
     { name: "HTML", icon: <FaHtml5 />, color: "#E34F26" },
     { name: "CSS", icon: <FaCss3 />, color: "#1572B6" },
@@ -96,7 +99,11 @@ function AboutMeWindow() {
     <div className={styles.aboutMe}>
       <div className={styles.header}>
         <div className={styles.avatar}>
-          <AiOutlineUser className={styles.avatarIcon} />
+          <img 
+          className={styles.avatarIcon} 
+          src="/images/batcat.jpg"
+          alt="Kichu A.K.A Betmen"
+          />
         </div>
         <div className={styles.basicInfo}>
           <h1 className={styles.name}>Mahadevan Reji</h1>
@@ -109,14 +116,17 @@ function AboutMeWindow() {
       <div className={styles.content}>
         <div className={styles.bio}>
           <p className={styles.bioText}>
-            I&apos;m a passionate full-stack developer with expertise in modern
-            web technologies and a strong foundation in systems programming. I
-            build scalable, efficient solutions that solve real-world problems.
+            I&apos;m a full-stack developer with a strong focus on scalable
+            architecture, performance, and systems thinking. From modern web
+            frameworks to low-level infrastructure, I love building things that
+            work fast, feel right, and scale well.
           </p>
           <p className={styles.bioText}>
-            My journey began with curiosity about how things work under the
-            hood, leading me to explore everything from high-level frameworks to
-            low-level systems programming.
+            My journey started with raw curiosity—how things work under the
+            hood. That&apos;s led me to explore everything from frontend animation
+            frameworks and mobile apps to writing my own database engine and
+            dabbling in machine learning. I don&apos;t just code—I build systems that
+            solve real problems.
           </p>
         </div>
 
@@ -132,7 +142,7 @@ function AboutMeWindow() {
         </div>
 
         <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Technologies</h3>
+          <h3 className={styles.sectionTitle}>Stuff I Know</h3>
           <div className={styles.techList}>
             {techStack.map((tech, index) => (
               <div

@@ -15,8 +15,8 @@
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -26,8 +26,11 @@
 }
 
 .avatarIcon {
-  font-size: 24px;
-  color: rgba(255, 255, 255, 0.7);
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: fill;
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.2));
 }
 
 .basicInfo {
@@ -209,21 +212,21 @@
   .aboutMe {
     padding: 24px;
   }
-  
+
   .actions {
     flex-wrap: wrap;
     gap: 12px;
   }
-  
+
   .resumeButton {
     margin-left: 0;
   }
-  
+
   .tech {
     padding: 5px 8px;
     font-size: 10px;
   }
-  
+
   .techIcon {
     font-size: 12px;
   }
@@ -233,24 +236,24 @@
   .aboutMe {
     padding: 20px;
   }
-  
+
   .content {
     gap: 24px;
   }
-  
+
   .header {
     margin-bottom: 32px;
   }
-  
+
   .techList {
     gap: 6px;
   }
-  
+
   .tech {
     padding: 4px 6px;
     gap: 4px;
   }
-  
+
   .techName {
     font-size: 9px;
   }

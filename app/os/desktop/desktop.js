@@ -132,6 +132,9 @@ function Desktop({ goSleep }) {
     img.onload = () => {
       setIsBackgroundImageLoaded(true);
     };
+    const betmenImg = new Image();
+    betmenImg.src = "/images/batcat.jpg";
+    betmenImg.onload = () => {};
   }, []);
 
   return (
