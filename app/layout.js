@@ -39,7 +39,7 @@ export const metadata = {
   openGraph: {
     title: "Mahadevan Reji | Full Stack Developer",
     description: "Full Stack Developer specializing in modern web technologies",
-    url: "https://www.kichu.space",
+    url: "https://www.mahadevan.dev",
     siteName: "Mahadevan Reji",
     locale: "en_US",
     type: "website",
@@ -63,7 +63,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.kichu.space",
+    canonical: "https://www.mahadevan.dev",
   },
   manifest: "/site.webmanifest",
 };
