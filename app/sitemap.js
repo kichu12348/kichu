@@ -1,4 +1,4 @@
-const URL = "https://kichu.space";
+const URL = "https://mahadevan.dev";
 
 export default async function sitemap() {
   // Define static routes
