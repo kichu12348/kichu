@@ -94,7 +94,7 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
     const interval = setInterval(() => {
       setCurrentTime(getCurrentTime());
       setCurrentDate(getCurrentDate());
-    }, 30000);
+    }, 1000);
 
     // Battery API
     if (navigator.getBattery) {
