@@ -75,7 +75,7 @@ function ContactWindow() {
               <span>GitHub</span>
             </a>
             <a
-              href="https://www.instagram.com/noiceetea"
+              href="https://www.instagram.com/whoiskichu__"
               className={styles.contactLink}
               target="_blank"
               rel="noopener noreferrer"
