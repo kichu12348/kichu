@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Indie+Flower&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playwrite+DK+Loopet:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Indie+Flower&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playwrite+DK+Loopet:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @font-face {
-  font-family: 'SF Mono';
-  src: url('/fonts/SFMonoRegular.otf') format('opentype');
+  font-family: "SF Mono";
+  src: url("/fonts/SFMonoRegular.otf") format("opentype");
 }
 
 :root {
-  --q-primary: 142, 70, 186; 
-  --q-secondary: 72, 149, 239; 
-  --q-tertiary: 76, 175, 142; 
-  --q-dark: 30, 34, 51; 
-  --q-light: 248, 250, 252; 
+  --q-primary: 142, 70, 186;
+  --q-secondary: 72, 149, 239;
+  --q-tertiary: 76, 175, 142;
+  --q-dark: 30, 34, 51;
+  --q-light: 248, 250, 252;
   --q-uncertainty: 5px;
   --q-wave-period: 15s;
   --q-probability: 0.8;
@@ -30,8 +30,8 @@ html {
 body {
   font-family: var(--font-geist-sans);
   overflow-x: hidden;
-  background-color: rgb(248, 250, 252); 
-  color: rgb(30, 34, 51); 
+  background-color: rgb(248, 250, 252);
+  color: rgb(30, 34, 51);
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -47,54 +47,50 @@ body::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, rgb(142, 70, 186), rgb(72, 149, 239));
 
   &:hover {
-    background: linear-gradient(180deg, #FF8AAE, #FFDD95);
+    background: linear-gradient(180deg, #ff8aae, #ffdd95);
   }
 }
 
 ::selection {
-  background: rgba(142, 70, 186, 0.2); 
+  background: rgba(142, 70, 186, 0.2);
   color: rgb(30, 34, 51);
 }
-
 
 @keyframes glitch {
   0% {
     text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75),
-                -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
-                0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
+      -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+      0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
   }
   14% {
     text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75),
-                -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
-                0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
+      -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+      0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
   }
   15% {
     text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
-                0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
-                -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
+      0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+      -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
   }
   49% {
     text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
-                0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
-                -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
+      0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+      -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
   }
   50% {
     text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
-                0.05em 0 0 rgba(0, 255, 255, 0.75),
-                0 -0.05em 0 rgba(0, 255, 0, 0.75);
+      0.05em 0 0 rgba(0, 255, 255, 0.75), 0 -0.05em 0 rgba(0, 255, 0, 0.75);
   }
   99% {
     text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
-                0.05em 0 0 rgba(0, 255, 255, 0.75),
-                0 -0.05em 0 rgba(0, 255, 0, 0.75);
+      0.05em 0 0 rgba(0, 255, 255, 0.75), 0 -0.05em 0 rgba(0, 255, 0, 0.75);
   }
   100% {
     text-shadow: -0.025em 0 0 rgba(255, 0, 255, 0.75),
-                -0.025em -0.025em 0 rgba(0, 255, 255, 0.75),
-                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75);
+      -0.025em -0.025em 0 rgba(0, 255, 255, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75);
   }
 }
-
 
 @media (pointer: fine) {
   body {
@@ -105,7 +101,7 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     width: 24px;
     height: 24px;
-    border: 2px solid rgba(142, 70, 186, 0.5); 
+    border: 2px solid rgba(142, 70, 186, 0.5);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
@@ -117,26 +113,30 @@ body::-webkit-scrollbar-thumb {
   .quantum-cursor.active {
     width: 48px;
     height: 48px;
-    background: rgba(142, 70, 186, 0.08); 
+    background: rgba(142, 70, 186, 0.08);
   }
 
-  a, button, [role="button"], input, select, textarea {
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
     cursor: none;
   }
 }
 
-
 body[data-quantum-state="1"] {
-  background-color: rgb(245, 250, 255); 
+  background-color: rgb(245, 250, 255);
 }
 
 body[data-quantum-state="2"] {
-  background-color: rgb(245, 252, 248); 
+  background-color: rgb(245, 252, 248);
 }
 
 body[data-quantum-state="3"] {
-  background-color: rgb(18, 24, 38); 
-  color: rgb(238, 242, 250); 
+  background-color: rgb(18, 24, 38);
+  color: rgb(238, 242, 250);
 }
 
 body[data-quantum-state="3"] ::-webkit-scrollbar-track {
@@ -171,12 +171,11 @@ body[data-quantum-state="3"] ::selection {
 }
 
 @media screen and (max-width: 768px) {
-  *{
+  * {
     scrollbar-width: none;
     -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
