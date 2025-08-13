@@ -5,8 +5,8 @@ import { TbReload } from "react-icons/tb";
 import { IoChevronForward, IoChevronBack, IoSearch } from "react-icons/io5";
 
 function BrowserWindow() {
-  const [url, setUrl] = useState("https://www.kichu.space");
-  const [inputUrl, setInputUrl] = useState("https://www.kichu.space");
+  const [url, setUrl] = useState("https://www.kichu.space/terminal");
+  const [inputUrl, setInputUrl] = useState("https://www.kichu.space/terminal");
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
