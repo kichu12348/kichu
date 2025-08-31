@@ -45,6 +45,7 @@ import Image from "next/image";
 
 import { TbBrandReactNative } from "react-icons/tb";
 import styles from "./about-me-window.module.css";
+import { FiInstagram } from "react-icons/fi";
 
 function AboutMeWindow() {
   const skills = [
@@ -178,14 +179,25 @@ function AboutMeWindow() {
             className={styles.link}
             target="_blank"
             rel="noopener noreferrer"
+            style={{"--hover-color": "#0077B5"}}
           >
             <FaLinkedinIn className={styles.icon} />
+          </a>
+          <a
+            href="https://www.instagram.com/whoiskichu__"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{"--hover-color": "#E1306C"}}
+          >
+            <FiInstagram className={styles.icon} />
           </a>
           <a
             href="mailto:rmahadevan574@gmail.com"
             className={styles.link}
             target="_blank"
             rel="noopener noreferrer"
+            style={{"--hover-color": "#EA4335"}}
           >
             <AiOutlineMail className={styles.icon} />
           </a>
@@ -194,6 +206,7 @@ function AboutMeWindow() {
             href="/resume/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            style={{"--hover-color": "#EA4335"}}
           >
             <IoIdCardSharp className={styles.downloadIcon} />
             Resume

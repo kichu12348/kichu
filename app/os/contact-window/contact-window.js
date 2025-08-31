@@ -61,6 +61,7 @@ function ContactWindow() {
               className={styles.contactLink}
               target="_blank"
               rel="noopener noreferrer"
+              style={{ "--hover-color": "#0077B5" }}
             >
               <FaLinkedinIn className={styles.contactIcon} />
               <span>LinkedIn</span>
@@ -79,6 +80,7 @@ function ContactWindow() {
               className={styles.contactLink}
               target="_blank"
               rel="noopener noreferrer"
+              style={{ "--hover-color": "#E1306C" }}
             >
               <FiInstagram className={styles.contactIcon} />
               <span>Instagram</span>

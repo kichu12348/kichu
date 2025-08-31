@@ -74,13 +74,20 @@
 }
 
 .contactLink:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--hover-color, rgba(255, 255, 255, 1));
 }
 
 .contactIcon {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
 }
+
+.contactLink:hover .contactIcon {
+  color: var(--hover-color, rgba(255, 255, 255, 1));
+}
+
+
 
 .form {
   display: flex;

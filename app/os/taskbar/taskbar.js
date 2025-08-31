@@ -20,7 +20,7 @@ import {
 } from "react-icons/ai";
 import { MdFolderOpen } from "react-icons/md";
 import { FaFirefoxBrowser, FaGamepad } from "react-icons/fa";
-import { IoTerminal } from "react-icons/io5";
+import { IoHomeOutline, IoTerminal } from "react-icons/io5";
 import { VscVscode } from "react-icons/vsc";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 
@@ -169,7 +169,7 @@ function Taskbar({ openWindows, onStartMenuToggle, focusWindow, openWindow }) {
     <div className={styles.taskbar}>
       <div className={styles.leftSection}>
         <button className={styles.startButton} onClick={onStartMenuToggle}>
-          <VscMenu className={styles.startIcon} />
+          <IoHomeOutline className={styles.startIcon} />
         </button>
 
         <button className={styles.searchButton}>
