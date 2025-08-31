@@ -1,6 +1,7 @@
 import React from "react";
-import { AiOutlineUser, AiOutlineGithub, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineGithub, AiOutlineMail } from "react-icons/ai";
 import { IoIdCardSharp } from "react-icons/io5";
+import { FaGolang } from "react-icons/fa6";
 import {
   SiReact,
   SiNextdotjs,
@@ -30,6 +31,7 @@ import {
   SiTauri,
   SiBun,
   SiTensorflow,
+  SiFastify
 } from "react-icons/si";
 import {
   FaAws,
@@ -72,6 +74,7 @@ function AboutMeWindow() {
     { name: "Express", icon: <SiExpress />, color: "#000000" },
     { name: "Hono", icon: <SiHono />, color: "#E36002" },
     { name: "NestJS", icon: <SiNestjs />, color: "#E0234E" },
+    { name: "Fastify", icon: <SiFastify />, color: "#000000" },
     { name: "Socket.io", icon: <SiSocketdotio />, color: "#010101" },
     { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
     { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28" },
@@ -89,6 +92,7 @@ function AboutMeWindow() {
     { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
     { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
     { name: "Rust", icon: <SiRust />, color: "#000000" },
+    { name: "Go", icon: <FaGolang />, color: "#00ADD8" },
     { name: "C", icon: <SiC />, color: "#A8B9CC" },
     { name: "Java", icon: <FaJava />, color: "#007396" },
     { name: "Python", icon: <SiPython />, color: "#3776AB" },
