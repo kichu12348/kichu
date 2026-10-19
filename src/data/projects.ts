@@ -85,5 +85,6 @@ export const PROFILE_INFO = {
   email: "rmahadevan574@gmail.com",
   githubUrl: "https://github.com/kichu12348",
   linkedinUrl: "https://www.linkedin.com/in/mahadevanreji",
-  resume: "/mahadevan_resume.pdf",
+  resume:
+    "https://cdn.jsdelivr.net/gh/kichu12348/kichu@master/public/mahadevan_resume.pdf",
 } as const;
