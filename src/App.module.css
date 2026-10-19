@@ -1,0 +1,126 @@
+.appContainer {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+@media (min-width: 960px) {
+  .appContainer {
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+@media (min-width: 640px) {
+  .mainContent {
+    padding: 1rem 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainContent {
+    padding: 1rem 3.5rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .mainContent {
+    padding: 0 5rem;
+    overflow: visible;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mainContent {
+    padding: 0 7rem;
+  }
+}
+
+.contentGrid {
+  width: 100%;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1.5rem;
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .contentGrid {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 2.5rem;
+    row-gap: 1.75rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .introBlock {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+}
+
+/* BLOCK 2: ASCII Window & Cat Scene */
+.asciiBlock {
+  /* On mobile: second, between intro and projects */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem 0;
+}
+
+@media (min-width: 960px) {
+  .asciiBlock {
+    grid-column: 7 / span 6;
+    grid-row: 1 / span 3;
+    align-items: flex-end;
+    margin: 0;
+  }
+}
+
+/* BLOCK 3: Projects & Experience */
+.projectsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .projectsBlock {
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .projectsBlock {
+    grid-column: 1 / span 6;
+    grid-row: 2;
+  }
+}
+
+/* BLOCK 4: Social Links & Tagline */
+.socialBlock {
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 960px) {
+  .socialBlock {
+    grid-column: 1 / span 6;
+    grid-row: 3;
+  }
+}

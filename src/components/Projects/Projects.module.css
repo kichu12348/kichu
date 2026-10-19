@@ -1,0 +1,80 @@
+.sectionHeading {
+  color: var(--section-title);
+  font-size: 11.5px;
+  font-weight: 400;
+  margin: 0 0 0.75rem 0;
+}
+
+@media (min-width: 640px) {
+  .sectionHeading {
+    font-size: 12.5px;
+  }
+}
+
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 12.5px;
+}
+
+@media (min-width: 640px) {
+  .projectsList {
+    gap: 0.625rem;
+    font-size: 14px;
+  }
+}
+
+.projectRow {
+  display: grid;
+  grid-template-columns: 78px 18px 1fr 18px;
+  align-items: baseline;
+  padding: 0.125rem 0;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.14s ease;
+}
+
+@media (min-width: 640px) {
+  .projectRow {
+    grid-template-columns: 96px 26px 1fr 24px;
+  }
+}
+
+.projName {
+  color: var(--muted);
+  transition: color 0.14s ease;
+}
+
+.projDash {
+  color: var(--desc-gray);
+  transition: color 0.14s ease;
+}
+
+.projDesc {
+  color: var(--desc-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.14s ease;
+}
+
+.projArrow {
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 0.15s ease, transform 0.15s ease, color 0.14s ease;
+  color: var(--fg);
+  text-align: right;
+}
+
+/* Active state */
+.projectRow.active .projName,
+.projectRow.active .projDash,
+.projectRow.active .projDesc {
+  color: var(--fg);
+}
+
+.projectRow.active .projArrow {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -1,0 +1,39 @@
+.heading {
+  color: var(--section-title);
+  font-size: 11.5px;
+  font-weight: 400;
+  margin: 0 0 0.625rem 0;
+}
+
+@media (min-width: 640px) {
+  .heading {
+    font-size: 12.5px;
+  }
+}
+
+.experienceRow {
+  display: grid;
+  grid-template-columns: 78px 18px 1fr;
+  align-items: baseline;
+  font-size: 12.5px;
+}
+
+@media (min-width: 640px) {
+  .experienceRow {
+    grid-template-columns: 96px 26px 1fr;
+    font-size: 14px;
+  }
+}
+
+.company {
+  color: var(--muted);
+}
+
+.dash {
+  color: var(--desc-gray);
+}
+
+.desc {
+  color: var(--desc-gray);
+  line-height: 1.625;
+}

@@ -1,0 +1,65 @@
+.name {
+  color: var(--fg);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.375;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .name {
+    font-size: 22px;
+  }
+}
+
+.bio {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.625;
+}
+
+@media (min-width: 640px) {
+  .bio {
+    font-size: 14.5px;
+  }
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .statusWrapper {
+    margin-top: 1.25rem;
+  }
+}
+
+.statusDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--accent-green);
+  display: inline-block;
+  flex-shrink: 0;
+  animation: statusPulse 3s ease-in-out infinite;
+}
+
+.statusText {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.625;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .statusText {
+    font-size: 13.5px;
+  }
+}

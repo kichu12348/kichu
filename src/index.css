@@ -1,0 +1,118 @@
+:root {
+  --bg: #0c0c0c;
+  --fg: #f2f2f2;
+  --muted: #888888;
+  --dim: #585858;
+  --accent-green: #6bcf7f;
+  --amber-glow: #e6b465;
+  --desc-gray: #767676;
+  --section-title: #6e6e6e;
+  --tagline-gray: #5e5e5e;
+  --prompt-gray: #a0a0a0;
+  --link-color: #e5e5e5;
+  --slash-color: #555555;
+  --border-dark: #222222;
+  --border-panel: #262626;
+  --border-inner: #1c1c1c;
+  --border-header: #1f1f1f;
+  --card-bg: #111111;
+  --inner-box-bg: #0b0b0b;
+  --pill-bg: #131313;
+  --pill-active-bg: #252525;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 769px) {
+  html,
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-dark) var(--bg);
+  }
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: rgba(230, 180, 101, 0.22);
+  color: #ffffff;
+}
+
+/* Subtle film grain overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Blinking terminal cursor */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Subtle green status pulse */
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+}
+
+/* Modal fade-in */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
