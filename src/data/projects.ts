@@ -1,6 +1,19 @@
 import type { Project, ExperienceItem } from "../types/portfolio";
 
 export const PROJECTS: readonly Project[] = [
+{
+    id: "bunkmate",
+    name: "bunkmate",
+    tag: "mobile / student productivity",
+    desc: "A student-focused attendance and timetable tracker built for university life. Helps students monitor attendance, plan around class schedules, and manage their attendance goals through a mobile-first experience with backend synchronization.",
+    metrics: [
+      "• adoption: 180+ users",
+      "• platform: cross-platform mobile application",
+      "• architecture: local-first data with backend synchronization",
+    ],
+    stack: "react native · expo · typescript",
+    link: "https://github.com/kichu12348/BunkMate",
+  },
   {
     id: "notchat",
     name: "notchat",
@@ -40,19 +53,7 @@ export const PROJECTS: readonly Project[] = [
     stack: "go · storage engines · b+ trees · messagepack",
     link: "https://github.com/kichu12348/NanoDB",
   },
-  {
-    id: "bunkmate",
-    name: "bunkmate",
-    tag: "mobile / student productivity",
-    desc: "A student-focused attendance and timetable tracker built for university life. Helps students monitor attendance, plan around class schedules, and manage their attendance goals through a mobile-first experience with backend synchronization.",
-    metrics: [
-      "• adoption: 180+ users",
-      "• platform: cross-platform mobile application",
-      "• architecture: local-first data with backend synchronization",
-    ],
-    stack: "react native · expo · typescript",
-    link: "https://github.com/kichu12348/BunkMate",
-  },
+  
   {
     id: "snapbook",
     name: "snapbook",
